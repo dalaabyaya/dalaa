@@ -9,7 +9,7 @@ window.DALAA_SETTINGS = {
   announcement: {
     enabled: true,
     messages: [
-      "Modesty, but make it Dalaa ♡"
+      "دلعي نفسك"
       // "New drop landing Friday ♡",
       // "Free shipping on orders over $XX ♡",
     ],
@@ -19,7 +19,7 @@ window.DALAA_SETTINGS = {
   /* Photography slots. Drop your photo into /assets/img/ and put the
      file name here (e.g. "assets/img/hero.jpg"). Empty = tasteful placeholder. */
   images: {
-    hero: "",
+    hero: "assets/img/sewing-pattern-placeholder.svg", // placeholder: swap for your campaign photo
     energyA: "",
     energyB: "",
     storyPreview: "",

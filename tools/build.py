@@ -38,11 +38,11 @@ def head(title, desc, extra=""):
 {extra}</head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
-<div class="announce" id="announce" role="region" aria-label="Announcement"><span>Modesty, but make it Dalaa ♡</span></div>
+<div class="announce" id="announce" role="region" aria-label="Announcement"><span class="arabic" lang="ar" dir="rtl">دلعي نفسك</span></div>
 <header class="header">
   <div class="wrap">
     <button class="icon-btn menu-btn" id="menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="nav">{ICON['menu']}</button>
-    <a class="brand" href="index.html" aria-label="Dalaa by Aya, home"><img src="assets/img/logo-pink-sm.png" alt="Dalaa by Aya" width="66" height="70"></a>
+    <a class="brand" href="index.html" aria-label="Dalaa by Aya, home"><img src="assets/img/logo-pink-sm.png" alt="Dalaa by Aya" width="133" height="140"></a>
     <nav class="nav" id="nav" aria-label="Main">
       <button class="icon-btn nav-close" id="nav-close" aria-label="Close menu">{ICON['close']}</button>
       <a href="index.html">Home</a><a href="shop.html">Shop</a><a href="story.html">Our Story</a>
@@ -152,7 +152,7 @@ home = head("Dalaa by Aya | Handmade modest fashion, Melbourne",
     </div>
     <div class="hero-visual rv">
       <span class="script script-float" style="font-size:58px">gorgeous</span>
-      {ph("hero", "Campaign photo goes here", "arch", "Dalaa by Aya campaign photograph")}
+      {ph("hero", "Campaign photo goes here", "hero-photo", "Sewing pattern laid out on a table (placeholder photo)")}
       <img class="sticker" src="assets/img/kiss.png" alt="">
       <div class="badge-circle"><div><b>handmade</b>in Melbourne</div></div>
     </div>
@@ -185,7 +185,7 @@ home = head("Dalaa by Aya | Handmade modest fashion, Melbourne",
       <div class="tile t2"><span class="script">Dalaa</span><h3>Covered, confident &amp; a little spoiled.</h3></div>
       <div class="tile t3">{ph("energyA", "Photo", "", "")}</div>
       <div class="tile t4">{ph("energyB", "Photo", "t-fuchsia", "")}</div>
-      <div class="tile t5"><span class="script">always</span><h3>Main character energy, always.</h3></div>
+      <div class="tile t5"><span class="script">always</span><h3>Special clothing for a special soul.</h3></div>
       <div class="tile t6"><h3>Pretty things for girls with personality.</h3><img class="kiss-s" src="assets/img/kiss.png" alt=""></div>
     </div>
   </div>
