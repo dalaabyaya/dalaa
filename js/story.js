@@ -1,7 +1,8 @@
 /* Our Story: scroll animation.
    Reveals, parallax, scroll-lit words, progress thread, cursor spotlight.
-   Does nothing when html lacks .story-ready (reduced motion / no JS),
-   in which case the page simply shows everything, statically. */
+   Does nothing when html lacks .story-ready (no JS), in which case the
+   page simply shows everything, statically. With reduced motion on, html
+   also has .story-calm: reveals still happen but parallax is skipped. */
 (function () {
   "use strict";
   window.__storyOK = true;
@@ -12,6 +13,7 @@
   function esc(s) { return s.replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
   function clamp(n, a, b) { return Math.max(a, Math.min(b, n)); }
 
+  var calm = root.classList.contains("story-calm");
   var vh = window.innerHeight;
 
   /* 1. Reveal things as they scroll into view */
@@ -35,6 +37,7 @@
 
   /* 3. Parallax: things drift at different speeds (and lips slowly turn) */
   var par = [];
+  if (!calm) {
   $$("[data-speed]").forEach(function (el) {
     par.push({ el: el, parent: el.parentElement, speed: parseFloat(el.getAttribute("data-speed")) || 0, rot: parseFloat(el.getAttribute("data-rot")) || 0 });
   });
@@ -42,6 +45,7 @@
     var ph = vis.querySelector(".ph");
     if (ph) par.push({ el: ph, parent: vis, speed: i % 2 ? -0.07 : 0.07, rot: 0 });
   });
+  }
 
   var thread = $$(".thread")[0];
   var spot = $$(".spot")[0];
@@ -64,7 +68,7 @@
 
     lits.forEach(function (L) {
       var r = L.el.getBoundingClientRect();
-      if (r.bottom < -200 || r.top > vh + 200) return;
+      if (r.top > vh + 200) return; // below the screen: leave as is. Above it: fully lit.
       var p = clamp((vh * 0.9 - r.top) / (vh * 0.5 + r.height / 2), 0, 1);
       var n = Math.round(p * L.words.length);
       L.words.forEach(function (w, i) { w.classList.toggle("on", i < n); });
@@ -78,7 +82,7 @@
   tick();
 
   /* 4. Soft pink spotlight that follows the mouse */
-  if (spot && window.matchMedia && window.matchMedia("(pointer:fine)").matches) {
+  if (!calm && spot && window.matchMedia && window.matchMedia("(pointer:fine)").matches) {
     var mx = 0, my = 0, sraf = 0;
     window.addEventListener("pointermove", function (e) {
       mx = e.clientX; my = e.clientY;

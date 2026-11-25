@@ -282,9 +282,9 @@ def drift(cls, speed, rot, r0, o, style=""):
             f'<img src="assets/img/kiss.png" alt="" style="--r0:{r0}deg;--o:{o}"></span>')
 
 STORY_EXTRA = ('<link rel="stylesheet" href="css/story.css">\n'
-               '<script>(function(){var d=document.documentElement;'
-               'if(!window.matchMedia("(prefers-reduced-motion: reduce)").matches){d.classList.add("story-ready");'
-               'setTimeout(function(){if(!window.__storyOK)d.classList.remove("story-ready")},3500)}})()</script>\n')
+               '<script>(function(){var d=document.documentElement;d.classList.add("story-ready");'
+               'if(window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches)d.classList.add("story-calm");'
+               'setTimeout(function(){if(!window.__storyOK)d.classList.remove("story-ready")},3500)})()</script>\n')
 
 story = head("Our Story | Dalaa by Aya",
              "Dalaa by Aya started with a wardrobe problem: stylish, full-coverage clothes that weren't beige. Read why Aya started making what she wanted to wear.",
@@ -357,7 +357,7 @@ story = head("Our Story | Dalaa by Aya",
 <section class="sign">
   <div class="glow g2" aria-hidden="true"></div>
   <div class="wrap">
-    <span class="logo-halo sx"><img class="logo-b" src="assets/img/logo-black-sm.png" alt="Dalaa in Arabic calligraphy, دلع" loading="lazy"></span>
+    <span class="logo-dark sx"><img src="assets/img/logo-dark.png" alt="Dalaa by Aya" width="443" height="466" loading="lazy"></span>
     <h2 class="lit">Because modesty was never meant to mean compromising on who you are.</h2>
     <span class="script welcome sx" style="--d:1">Welcome to Dalaa, gorgeous.</span>
     <div class="sx" style="--d:2"><a class="btn btn-primary btn-glow" href="shop.html">Shop the collection</a></div>
