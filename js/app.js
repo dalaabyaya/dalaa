@@ -165,13 +165,24 @@
       '<div class="card-info"><h3 class="card-name"><a href="product.html?p=' + esc(p.slug) + '">' + esc(p.name) + "</a></h3>" +
       '<div class="card-meta">' + priceHTML(p) + sw + "</div></div></article>";
   };
+  /* Page turn: hover (or keyboard focus) turns the cover page; leaving turns it back. */
+  function turn(card, on) {
+    if (!card) return;
+    var is = card.classList.contains("turned");
+    if (on === is) return;
+    card.classList.toggle("turned", on); card.classList.toggle("unturned", !on);
+  }
+  document.addEventListener("mouseover", function (e) { var c = e.target.closest && e.target.closest(".card"); if (c && window.matchMedia("(hover:hover)").matches) turn(c, true); });
+  document.addEventListener("mouseout", function (e) { var c = e.target.closest && e.target.closest(".card"); if (c && !(e.relatedTarget && c.contains(e.relatedTarget))) turn(c, false); });
+  document.addEventListener("focusin", function (e) { var c = e.target.closest && e.target.closest(".card"); if (c) turn(c, true); });
+  document.addEventListener("focusout", function (e) { var c = e.target.closest && e.target.closest(".card"); if (c && !(e.relatedTarget && c.contains(e.relatedTarget))) turn(c, false); });
   /* On phones there is no hover, so each cover turns its page once as it scrolls into view. */
   (function () {
     if (!window.IntersectionObserver || !window.matchMedia || !matchMedia("(hover:none)").matches) return;
     var seen = new IntersectionObserver(function (es) {
       es.forEach(function (e) {
         if (!e.isIntersecting) return; seen.unobserve(e.target);
-        var c = e.target; setTimeout(function () { c.classList.add("peek"); setTimeout(function () { c.classList.remove("peek"); }, 2200); }, 500);
+        var c = e.target; setTimeout(function () { turn(c, true); setTimeout(function () { turn(c, false); }, 2400); }, 500);
       });
     }, { threshold: 0.7 });
     function scan(root) { Array.prototype.forEach.call((root.querySelectorAll ? root.querySelectorAll(".card") : []), function (c) { if (!c.__w) { c.__w = 1; seen.observe(c); } }); }
