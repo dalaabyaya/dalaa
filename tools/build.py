@@ -371,7 +371,7 @@ story = head("Our Story | Dalaa by Aya",
 <section class="sign">
   <div class="glow g2" aria-hidden="true"></div>
   <div class="wrap">
-    <span class="logo-ar sx"><img src="assets/img/logo-arabic-dark.png" alt="دلع, Dalaa by Aya, in Arabic calligraphy" width="800" height="920" loading="lazy"></span>
+    <span class="logo-ar sx"><img src="assets/img/logo-story.png" alt="Dalaa by Aya" width="870" height="916" loading="lazy"></span>
     <h2 class="lit">Because modesty was never meant to mean compromising on who you are.</h2>
     <span class="script welcome sx" style="--d:1">Welcome to Dalaa, gorgeous.</span>
     <div class="sx" style="--d:2"><a class="btn btn-primary btn-glow" href="shop.html">Shop the collection</a></div>

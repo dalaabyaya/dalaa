@@ -153,13 +153,33 @@
     var sw = p.colors.length > 1 ? '<div class="swatches" role="group" aria-label="Colours">' + p.colors.map(function (k, i) {
       return '<button class="sw" style="--c:' + esc(k.swatch || k.hex) + '" data-ci="' + i + '" aria-pressed="' + (i === ci) + '" aria-label="' + esc(k.name) + '" title="' + esc(k.name) + '"></button>';
     }).join("") + "</div>" : '<div class="swatches"><span class="sw" style="--c:' + esc(c.swatch || c.hex) + '" title="' + esc(c.name) + '"></span></div>';
-    return '<article class="card" data-id="' + esc(p.id) + '" data-ci="' + ci + '">' +
+    var no = String(Math.max(0, (window.DALAA_PRODUCTS || []).indexOf(p)) + 1).padStart(2, "0");
+    return '<article class="card' + (p.placeholder ? " is-ph" : "") + '" data-id="' + esc(p.id) + '" data-ci="' + ci + '">' +
       '<div class="cm"><a class="card-media" href="product.html?p=' + esc(p.slug) + '" aria-label="' + esc(p.name) + '">' + tags +
-      '<span class="media-main">' + imgOrPh(p, c, 0, "main") + '</span><span class="media-alt">' + imgOrPh(p, c, 1, "alt") + "</span></a>" +
+      '<span class="media-alt">' + imgOrPh(p, c, 1, "alt") + "</span>" +
+      '<span class="leaf"><span class="leaf-front"><span class="media-main">' + imgOrPh(p, c, 0, "main") + "</span>" +
+      '<span class="cv-top"><span class="cv-mast">DALAA</span><span class="cv-by">by aya</span></span>' +
+      '<span class="cv-no">No. ' + no + '</span><span class="cv-type">' + esc(p.type) + "</span></span>" +
+      '<span class="leaf-back"></span></span></a>' +
       '<div class="quick">' + (sold ? '<button class="quick-btn" disabled>Sold out</button>' : '<button class="quick-btn" data-act="qa">Quick add</button>') + "</div></div>" +
       '<div class="card-info"><h3 class="card-name"><a href="product.html?p=' + esc(p.slug) + '">' + esc(p.name) + "</a></h3>" +
       '<div class="card-meta">' + priceHTML(p) + sw + "</div></div></article>";
   };
+  /* On phones there is no hover, so each cover turns its page once as it scrolls into view. */
+  (function () {
+    if (!window.IntersectionObserver || !window.matchMedia || !matchMedia("(hover:none)").matches) return;
+    var seen = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        if (!e.isIntersecting) return; seen.unobserve(e.target);
+        var c = e.target; setTimeout(function () { c.classList.add("peek"); setTimeout(function () { c.classList.remove("peek"); }, 2200); }, 500);
+      });
+    }, { threshold: 0.7 });
+    function scan(root) { Array.prototype.forEach.call((root.querySelectorAll ? root.querySelectorAll(".card") : []), function (c) { if (!c.__w) { c.__w = 1; seen.observe(c); } }); }
+    document.addEventListener("DOMContentLoaded", function () {
+      scan(document);
+      new MutationObserver(function (ms) { ms.forEach(function (m) { Array.prototype.forEach.call(m.addedNodes, function (n) { if (n.nodeType === 1) { if (n.classList.contains("card")) { if (!n.__w) { n.__w = 1; seen.observe(n); } } else scan(n); } }); }); }).observe(document.body, { childList: true, subtree: true });
+    });
+  })();
 
   function swapCardColor(card, ci) {
     var p = byId(card.dataset.id), c = p.colors[ci]; card.dataset.ci = ci;

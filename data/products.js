@@ -24,7 +24,8 @@
 (function () {
   var SIZES = ["XS", "S", "M", "L", "XL"];
   function p(o) { o.placeholder = true; o.sizes = SIZES; return o; }
-  var SPARKLE_PHOTOS = ["assets/products/obsidian-sparkle.jpg", "assets/products/obsidian-sparkle-2.jpg"];
+  var SPARKLE_PHOTOS = ["assets/products/obsidian-sparkle-cover.jpg", "assets/products/obsidian-sparkle.jpg", "assets/products/obsidian-sparkle-2.jpg"];
+  var DENIM_PHOTOS = ["assets/products/denim-tie-top.jpg", "assets/products/denim-tie-top-2.jpg"];
 
   window.DALAA_PRODUCTS = [
     p({
@@ -60,6 +61,29 @@
           swatch: "conic-gradient(from 30deg,#F7C6DA,#D6246E,#7B4B94,#2F6F8F,#E8B04B,#F7C6DA)",
           note: "Have a specific fabric in mind? Drop off your own fabric for 10% off",
           images: SPARKLE_PHOTOS, stock: { XS: 10, S: 10, M: 10, L: 10, XL: 10 } }
+      ]
+    },
+    /* A real piece: Asymmetrical denim tie top. */
+    {
+      id: "asymmetrical-denim-tie-top", slug: "asymmetrical-denim-tie-top",
+      name: "Asymmetrical denim tie top", type: "Top", price: 69, badge: "New", featured: true,
+      sizes: SIZES,
+      description: "A structured dark denim top with an asymmetrical wrap front, fastened with two hand-tied bows and finished with contrast white topstitching. Wide, flared sleeves give it a modest, relaxed shape with plenty of drama. Handmade in Melbourne.",
+      specs: [
+        ["Style", "Top"],
+        ["Neckline", "Asymmetrical wrap"],
+        ["Closure", "Two side tie bows"],
+        ["Sleeves", "Wide flared sleeves, contrast topstitching"],
+        ["Colours", "Dark denim"],
+        ["Sizes", "XS, S, M, L, XL"],
+        ["Fabric", "TBC"],
+        ["Fit", "TBC"],
+        ["Length", "TBC"],
+        ["Made", "Handmade in Melbourne"]
+      ],
+      colors: [
+        { name: "Dark denim", hex: "#1F2A44", images: DENIM_PHOTOS,
+          stock: { XS: 5, S: 5, M: 5, L: 5, XL: 5 } }
       ]
     },
     p({

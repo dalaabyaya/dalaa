@@ -19,7 +19,7 @@ window.DALAA_SETTINGS = {
   /* Photography slots. Drop your photo into /assets/img/ and put the
      file name here (e.g. "assets/img/hero.jpg"). Empty = tasteful placeholder. */
   images: {
-    hero: "assets/img/sewing-pattern-placeholder.svg", // placeholder: swap for your campaign photo
+    hero: "assets/img/fabric-rolls.jpg", // swap for your campaign photo when you have one
     energyA: "",
     energyB: "",
     storyPreview: "",
