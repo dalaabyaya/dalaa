@@ -45,7 +45,7 @@ def head(title, desc, extra="", bodyclass=""):
 <header class="header">
   <div class="wrap">
     <button class="icon-btn menu-btn" id="menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="nav">{ICON['menu']}</button>
-    <a class="brand" href="index.html" aria-label="Dalaa by Aya, home"><img src="assets/img/logo-pink-sm.png" alt="Dalaa by Aya" width="133" height="140"></a>
+    <a class="brand" href="index.html" aria-label="Dalaa by Aya, home"><img src="assets/img/{'logo-story-sm.png' if 'story-dark' in bodyclass else 'logo-pink-sm.png'}" alt="Dalaa by Aya" width="{'132' if 'story-dark' in bodyclass else '133'}" height="{'140' if 'story-dark' in bodyclass else '140'}"></a>
     <nav class="nav" id="nav" aria-label="Main">
       <button class="icon-btn nav-close" id="nav-close" aria-label="Close menu">{ICON['close']}</button>
       <a href="index.html">Home</a><a href="shop.html">Shop</a><a href="story.html">Our Story</a>
