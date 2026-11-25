@@ -4,6 +4,7 @@ Run from the project root:  python3 tools/build.py
 Product and settings data are NOT here: edit data/products.js and data/settings.js.
 """
 import os
+import random
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 FONTS = ("https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&family=Birthstone&"
@@ -17,7 +18,7 @@ ICON = {
     "close": '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>',
 }
 
-def head(title, desc, extra=""):
+def head(title, desc, extra="", bodyclass=""):
     return f"""<!doctype html>
 <html lang="en-AU" class="no-js">
 <head>
@@ -36,7 +37,7 @@ def head(title, desc, extra=""):
 <link rel="stylesheet" href="{FONTS}">
 <link rel="stylesheet" href="css/main.css">
 {extra}</head>
-<body>
+<body{bodyclass}>
 <a class="skip" href="#main">Skip to content</a>
 <div class="announce" id="announce" role="region" aria-label="Announcement"><span class="arabic" lang="ar" dir="rtl">دلعي نفسك</span></div>
 <header class="header">
@@ -268,67 +269,105 @@ product = head("Product | Dalaa by Aya",
 write("product.html", product)
 
 # ------------------------------------------------------------------ STORY
+def words(text, start=0):
+    return " ".join(f'<span class="w" style="--i:{start + i}"><span>{w}</span></span>' for i, w in enumerate(text.split()))
+
+_r = random.Random(11)
+sparks = "".join(
+    f'<i class="spark" style="left:{_r.randint(4, 96)}%;top:{_r.randint(6, 90)}%;--s:{_r.choice([2, 3, 3, 4])}px;'
+    f'--t:{_r.uniform(3, 6.5):.1f}s;--dl:{_r.uniform(0, 5):.1f}s"></i>' for _ in range(22))
+
+def drift(cls, speed, rot, r0, o, style=""):
+    return (f'<span class="drift {cls}" data-speed="{speed}" data-rot="{rot}" aria-hidden="true" style="{style}">'
+            f'<img src="assets/img/kiss.png" alt="" style="--r0:{r0}deg;--o:{o}"></span>')
+
+STORY_EXTRA = ('<link rel="stylesheet" href="css/story.css">\n'
+               '<script>(function(){var d=document.documentElement;'
+               'if(!window.matchMedia("(prefers-reduced-motion: reduce)").matches){d.classList.add("story-ready");'
+               'setTimeout(function(){if(!window.__storyOK)d.classList.remove("story-ready")},3500)}})()</script>\n')
+
 story = head("Our Story | Dalaa by Aya",
-             "Dalaa by Aya started with a wardrobe problem: stylish, full-coverage clothes that weren't beige. Read why Aya started making what she wanted to wear.") + f"""
+             "Dalaa by Aya started with a wardrobe problem: stylish, full-coverage clothes that weren't beige. Read why Aya started making what she wanted to wear.",
+             extra=STORY_EXTRA, bodyclass=' class="story-dark"') + f"""
+<div class="thread" aria-hidden="true"><i></i></div>
+<div class="spot" aria-hidden="true"></div>
 <main id="main">
 <section class="story-hero">
-  <div class="wrap rv">
-    <span class="eyebrow">Our story</span>
-    <h1>Not just another <em>modest</em> clothing label.</h1>
-    <p class="script byline" style="font-size:44px">with love, Aya</p>
+  <div class="glow g1" aria-hidden="true"></div>
+  {sparks}
+  {drift("d-hero-a", 0.16, 30, -18, 0.34)}
+  {drift("d-hero-b", -0.12, -24, 16, 0.26)}
+  <div class="wrap">
+    <span class="eyebrow sx">Our story</span>
+    <h1 class="sx split">{words("Not just another")} <em class="w" style="--i:3"><span>modest</span></em> {words("clothing label.", 4)}</h1>
+    <p class="script byline sx" style="--d:5;font-size:44px">with love, Aya</p>
   </div>
+  <div class="cue" aria-hidden="true"><span>scroll</span><i></i></div>
 </section>
 
 <section class="chapter">
+  <span class="ghost" data-speed="-0.14" aria-hidden="true">i</span>
   <div class="wrap">
-    <div class="vis rv">{ph("storyStruggle", "Your photo goes here", "arch", "Aya")}</div>
-    <div class="rv"><span class="num">i. The struggle</span><h2>Shopping was the unexpected challenge.</h2>
-      <p>As a Muslim girl growing up in the West, alongside all the other challenges young diaspora face, came one I never saw coming: shopping.</p>
-      <p>Finding clothes with enough coverage was no easy feat. Walking into a shop and finding a stylish full-length top, or a dress that ticks every box? Nearly impossible.</p></div>
+    <div class="vis sx">{ph("storyStruggle", "Your photo goes here", "arch", "Aya")}</div>
+    <div><span class="num sx">i. The struggle</span><h2 class="sx split">{words("Shopping was the unexpected challenge.")}</h2>
+      <p class="sx" style="--d:2">As a Muslim girl growing up in the West, alongside all the other challenges young diaspora face, came one I never saw coming: shopping.</p>
+      <p class="sx" style="--d:3">Finding clothes with enough coverage was no easy feat. Walking into a shop and finding a stylish full-length top, or a dress that ticks every box? Nearly impossible.</p></div>
   </div>
 </section>
 
 <section class="chapter alt flip">
+  <span class="ghost" data-speed="-0.14" aria-hidden="true">ii</span>
+  {drift("d-ch2", 0.2, 50, 12, 0.2)}
   <div class="wrap">
-    <div class="vis rv">{ph("storyFrustration", "Your photo goes here", "t-cream", "A Dalaa piece")}</div>
-    <div class="rv"><span class="num">ii. The frustration</span><h2>The same designs. The same nudes.</h2>
-      <p>I can't deny there are other Australian modest clothing lines out there. But I'm sure we've all seen enough of the identical nude palettes across the board.</p>
-      <p class="big">We're sick of seeing the same designs over and over again.</p></div>
+    <div class="vis sx">{ph("storyFrustration", "Your photo goes here", "t-cream", "A Dalaa piece")}</div>
+    <div><span class="num sx">ii. The frustration</span><h2 class="sx split">{words("The same designs. The same nudes.")}</h2>
+      <p class="sx" style="--d:2">I can't deny there are other Australian modest clothing lines out there. But I'm sure we've all seen enough of the identical nude palettes across the board.</p>
+      <p class="big sx" style="--d:3">We're sick of seeing the same designs over and over again.</p></div>
   </div>
 </section>
 
-<section class="pull"><img class="kiss-p" src="assets/img/kiss.png" alt=""><div class="wrap rv"><p>Clothing at my own accord.</p></div></section>
+<section class="pull">
+  {drift("d-pull-a", -0.14, 60, 14, 0.3)}
+  {drift("d-pull-b", 0.18, -50, -12, 0.22)}
+  <div class="wrap"><p class="lit">Clothing at my own accord.</p></div>
+</section>
 
 <section class="chapter">
+  <span class="ghost" data-speed="-0.14" aria-hidden="true">iii</span>
+  <div class="glow g3" aria-hidden="true"></div>
   <div class="wrap">
-    <div class="vis rv">{ph("storyHands", "Your photo goes here", "arch t-fuchsia", "Aya sewing")}</div>
-    <div class="rv"><span class="num">iii. Taking matters into my own hands</span><h2>So I made what I wanted.</h2>
-      <p>Years later, I stopped waiting for someone else to design it. I took matters into my own hands and created the clothes I wanted to wear myself.</p>
-      <p>I'm sure this isn't an issue I alone face, and it's something I feel obligated to share with you all.</p></div>
+    <div class="vis sx">{ph("storyHands", "Your photo goes here", "arch t-fuchsia", "Aya sewing")}</div>
+    <div><span class="num sx">iii. Taking matters into my own hands</span><h2 class="sx split">{words("So I made what I wanted.")}</h2>
+      <p class="sx" style="--d:2">Years later, I stopped waiting for someone else to design it. I took matters into my own hands and created the clothes I wanted to wear myself.</p>
+      <p class="sx" style="--d:3">I'm sure this isn't an issue I alone face, and it's something I feel obligated to share with you all.</p></div>
   </div>
 </section>
 
 <section class="chapter alt philosophy flip">
+  <span class="ghost" data-speed="-0.14" aria-hidden="true">iv</span>
+  {drift("d-ch4", -0.18, -40, -14, 0.2)}
   <div class="wrap">
-    <div class="vis rv">{ph("storyPhilosophy", "Your photo goes here", "t-hot", "A Dalaa piece")}</div>
-    <div class="rv"><span class="num">iv. The Dalaa philosophy</span><h2>Modesty, on your own terms.</h2>
-      <p><span class="arabic" style="font-size:1.2em">دلع</span> (Dalaa) is the feeling of being adored, pampered, a little spoiled and a little extra, in the best way. That's how I want you to feel in what you wear.</p>
-      <p>Every piece is designed with intention, individuality and an appreciation for the details. Because modesty should never mean compromising on personal style.</p></div>
+    <div class="vis sx">{ph("storyPhilosophy", "Your photo goes here", "t-hot", "A Dalaa piece")}</div>
+    <div><span class="num sx">iv. The Dalaa philosophy</span><h2 class="sx split">{words("Modesty, on your own terms.")}</h2>
+      <p class="sx" style="--d:2"><span class="arabic" style="font-size:1.2em">دلع</span> (Dalaa) is the feeling of being adored, pampered, a little spoiled and a little extra, in the best way. That's how I want you to feel in what you wear.</p>
+      <p class="sx" style="--d:3">Every piece is designed with intention, individuality and an appreciation for the details. Because modesty should never mean compromising on personal style.</p></div>
   </div>
 </section>
 
 <section class="sign">
-  <div class="wrap rv">
-    <img class="logo-b" src="assets/img/logo-black-sm.png" alt="Dalaa in Arabic calligraphy, دلع" loading="lazy">
-    <h2>Because modesty was never meant to mean compromising on who you are.</h2>
-    <span class="script welcome">Welcome to Dalaa, gorgeous.</span>
-    <a class="btn btn-primary" href="shop.html">Shop the collection</a>
+  <div class="glow g2" aria-hidden="true"></div>
+  <div class="wrap">
+    <span class="logo-halo sx"><img class="logo-b" src="assets/img/logo-black-sm.png" alt="Dalaa in Arabic calligraphy, دلع" loading="lazy"></span>
+    <h2 class="lit">Because modesty was never meant to mean compromising on who you are.</h2>
+    <span class="script welcome sx" style="--d:1">Welcome to Dalaa, gorgeous.</span>
+    <div class="sx" style="--d:2"><a class="btn btn-primary btn-glow" href="shop.html">Shop the collection</a></div>
   </div>
 </section>
 {newsletter()}
 </main>
 {news_footer()}
 {chrome_layers()}
+<script src="js/story.js"></script>
 </body></html>
 """
 write("story.html", story)
