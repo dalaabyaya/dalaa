@@ -12,10 +12,13 @@ Open `index.html` in a browser to preview. To publish, upload the whole folder t
 | Announcement bar text (or turn it off) | `data/settings.js` → `announcement` |
 | Hero / story / campaign photos | drop files in `assets/img/`, then name them in `data/settings.js` → `images` |
 | Products, prices, sizes, colours, stock, product photos | `data/products.js` |
+| Description and Specifications dropdowns, a note under a colour | `data/products.js` → `description`, `specs`, and a colour's `note` |
 | Social links, email, location | `data/settings.js` → `contact` |
 | Shipping, returns, size guide, fabric & care text | `data/settings.js` |
 | Page copy | `tools/build.py`, then run `python3 tools/build.py` |
 | Colours and fonts | `css/main.css` (variables at the top) |
+
+After you change any CSS or JS, run `python3 tools/build.py`. It stamps every CSS/JS link with a version, so visitors' browsers always fetch the newest files instead of showing a stale cached copy.
 
 Logos: `assets/img/logo-pink*.png` (primary) and `assets/img/logo-black*.png` (alternative, used on Our Story). They are your original artwork with only the white background made transparent. `kiss.png` is the lip print taken from your pink logo, used as the decorative motif.
 

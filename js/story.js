@@ -27,6 +27,16 @@
     sx.forEach(function (el) { el.classList.add("is-in"); });
   }
 
+  /* Safety net: never leave content hidden. If anything near the screen is still
+     waiting after a few seconds (say, a browser that never fires the observer), show it. */
+  setTimeout(function () {
+    sx.forEach(function (el) {
+      if (el.classList.contains("is-in")) return;
+      var r = el.getBoundingClientRect();
+      if (r.top < vh * 1.2 && r.bottom > -vh * 0.2) el.classList.add("is-in");
+    });
+  }, 4000);
+
   /* 2. Words that light up one by one as you scroll through them */
   var lits = $$(".lit").map(function (el) {
     var text = el.textContent.replace(/\s+/g, " ").trim();

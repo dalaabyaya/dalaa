@@ -5,6 +5,8 @@ Product and settings data are NOT here: edit data/products.js and data/settings.
 """
 import os
 import random
+import re
+import hashlib
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 FONTS = ("https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&family=Birthstone&"
@@ -132,7 +134,19 @@ def ph(slot, label, cls="", alt=""):
     return (f'<div class="ph {cls}" data-slot="{slot}" data-alt="{alt}"><img class="ph-kiss" src="assets/img/kiss.png" alt="">'
             f'<span class="ph-label">{label}</span></div>')
 
+def _ver(path):
+    """Short content hash, so browsers re-download a CSS/JS file whenever it changes."""
+    try:
+        with open(os.path.join(ROOT, path), "rb") as f:
+            return hashlib.md5(f.read()).hexdigest()[:8]
+    except OSError:
+        return None
+
 def write(name, html):
+    def bust(m):
+        v = _ver(m.group(2))
+        return f'{m.group(1)}="{m.group(2)}?v={v}"' if v else m.group(0)
+    html = re.sub(r'(href|src)="((?:css|js|data)/[^"?#]+\.(?:css|js))"', bust, html)
     with open(os.path.join(ROOT, name), "w", encoding="utf-8") as f:
         f.write(html)
 
@@ -279,7 +293,7 @@ sparks = "".join(
 
 def drift(cls, speed, rot, r0, o, style=""):
     return (f'<span class="drift {cls}" data-speed="{speed}" data-rot="{rot}" aria-hidden="true" style="{style}">'
-            f'<img src="assets/img/kiss.png" alt="" style="--r0:{r0}deg;--o:{o}"></span>')
+            f'<img src="assets/img/kiss-glow.png" alt="" style="--r0:{r0}deg;--o:{o}"></span>')
 
 STORY_EXTRA = ('<link rel="stylesheet" href="css/story.css">\n'
                '<script>(function(){var d=document.documentElement;d.classList.add("story-ready");'
@@ -357,7 +371,7 @@ story = head("Our Story | Dalaa by Aya",
 <section class="sign">
   <div class="glow g2" aria-hidden="true"></div>
   <div class="wrap">
-    <span class="logo-dark sx"><img src="assets/img/logo-dark.png" alt="Dalaa by Aya" width="443" height="466" loading="lazy"></span>
+    <span class="logo-ar sx"><img src="assets/img/logo-arabic-dark.png" alt="دلع, Dalaa by Aya, in Arabic calligraphy" width="800" height="920" loading="lazy"></span>
     <h2 class="lit">Because modesty was never meant to mean compromising on who you are.</h2>
     <span class="script welcome sx" style="--d:1">Welcome to Dalaa, gorgeous.</span>
     <div class="sx" style="--d:2"><a class="btn btn-primary btn-glow" href="shop.html">Shop the collection</a></div>

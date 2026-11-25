@@ -28,6 +28,7 @@
   var allTypes = uniq(P.map(function (p) { return p.type; }));
   var allSizes = uniq([].concat.apply([], P.map(function (p) { return p.sizes; })));
   var colorMap = {}; P.forEach(function (p) { p.colors.forEach(function (c) { if (!colorMap[c.hex]) colorMap[c.hex] = c.name.replace(/\s*\(placeholder\)/i, ""); }); });
+  var swatchMap = {}; P.forEach(function (p) { p.colors.forEach(function (c) { if (c.swatch && !swatchMap[c.hex]) swatchMap[c.hex] = c.swatch; }); });
   var anyPrice = P.some(function (p) { return p.price != null; });
 
   function buildFilters() {
@@ -38,7 +39,7 @@
       return '<button class="chip" data-f="sizes" data-v="' + esc(s) + '" aria-pressed="false">' + esc(s) + "</button>";
     }).join("");
     $("#f-color").innerHTML = Object.keys(colorMap).map(function (h) {
-      return '<button class="sw" style="--c:' + esc(h) + ';width:30px;height:30px" data-f="colors" data-v="' + esc(h) + '" aria-pressed="false" aria-label="' + esc(colorMap[h]) + '" title="' + esc(colorMap[h]) + '"></button>';
+      return '<button class="sw" style="--c:' + esc(swatchMap[h] || h) + ';width:30px;height:30px" data-f="colors" data-v="' + esc(h) + '" aria-pressed="false" aria-label="' + esc(colorMap[h]) + '" title="' + esc(colorMap[h]) + '"></button>';
     }).join("");
     $("#f-price-note").textContent = anyPrice ? "" : "Prices will appear here once your collection is added.";
   }

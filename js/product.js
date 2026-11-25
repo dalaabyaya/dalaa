@@ -27,7 +27,7 @@
     function color() { return p.colors[st.ci]; }
     function stock(size) { return (color().stock && color().stock[size]) || 0; }
     function remaining() { return Math.max(0, stock(st.size) - D.cart.qtyOf(p.id, color().name, st.size)); }
-    function nImgs() { return Math.max(color().images.length, 4); }
+    function nImgs() { return color().images.length || 4; } // real photos only; placeholders keep 4 slots
 
     function draw() {
       var c = color(), n = nImgs();
@@ -39,11 +39,10 @@
         '<div class="pdp-info">' +
         (p.badge ? '<span class="eyebrow">' + esc(p.badge) + "</span>" : '<span class="eyebrow">' + esc(p.type) + "</span>") +
         "<h1>" + esc(p.name) + "</h1>" +
-        '<div class="pdp-price' + (p.price == null ? " tbd" : "") + '">' + (p.price == null ? "Price TBC" : D.money(p.price) + ' <span style="font-size:12px;color:var(--muted);letter-spacing:.14em">AUD</span>') + "</div>" +
+        '<div class="pdp-price' + (p.price == null ? " tbd" : "") + '">' + (p.price == null ? "Price TBC" : D.money(p.price) + ' <span class="cur">AUD</span>') + "</div>" +
         (p.placeholder ? '<p class="notice">This is a placeholder product so you can see how the store works. Real pieces, prices and photos replace it.</p>' : "") +
-        '<p class="pdp-desc">' + esc(p.description) + "</p>" +
         '<div class="opt"><div class="opt-label">Colour <span>' + esc(c.name) + '</span></div><div class="swatches big" role="group" aria-label="Colour">' +
-        p.colors.map(function (k, i) { return '<button class="sw" style="--c:' + esc(k.hex) + '" data-ci="' + i + '" aria-pressed="' + (i === st.ci) + '" aria-label="' + esc(k.name) + '" title="' + esc(k.name) + '"></button>'; }).join("") + "</div></div>" +
+        p.colors.map(function (k, i) { return '<button class="sw" style="--c:' + esc(k.swatch || k.hex) + '" data-ci="' + i + '" aria-pressed="' + (i === st.ci) + '" aria-label="' + esc(k.name) + '" title="' + esc(k.name) + '"></button>'; }).join("") + "</div>" + (c.note ? '<p class="color-note">' + esc(c.note) + "</p>" : "") + "</div>" +
         '<div class="opt"><div class="opt-label">Size <button data-open="sizeguide">Size guide</button></div><div class="size-row" role="group" aria-label="Size">' +
         p.sizes.map(function (z) { return '<button class="chip" data-size="' + esc(z) + '" aria-pressed="' + (z === st.size) + '"' + (stock(z) < 1 ? " disabled" : "") + ">" + esc(z) + "</button>"; }).join("") + "</div></div>" +
         '<p class="stock-note" id="stock-note" aria-live="polite"></p>' +
@@ -51,9 +50,17 @@
         '<button class="btn btn-primary" id="add"' + (sold ? " disabled" : "") + ">" + (sold ? "Sold out" : "Add to bag, gorgeous") + "</button></div>" +
         '<div class="perks"><span>♡ Handmade in Melbourne</span><span>♡ Prices in AUD</span></div>' +
         '<div class="acc">' +
+        '<details><summary>Description</summary><div class="acc-body"><p>' + esc(p.description) + "</p></div></details>" +
+        '<details><summary>Specifications</summary><div class="acc-body">' + specsHTML() + "</div></details>" +
         "<details><summary>Fabric &amp; care</summary><div class=\"acc-body\"><p>" + esc(p.fabricCare || S.defaultFabricCare) + "</p></div></details>" +
         "<details><summary>Shipping &amp; returns</summary><div class=\"acc-body\"><p>Shipping time: " + tbc(S.shipping.domesticTime) + " &nbsp; Cost: " + tbc(S.shipping.domesticCost) + '</p><p>Returns: ' + tbc(S.shipping.returnsWindow) + ' · <a class="link-u" style="font-size:11px" href="info.html#shipping">Full details</a></p></div></details></div></div>';
       note();
+    }
+    function specsHTML() {
+      var has = p.specs && p.specs.length;
+      var rows = has ? p.specs : [["Style", p.type], ["Sizes", p.sizes.join(", ")]];
+      return '<dl class="specs">' + rows.map(function (r) { return "<div><dt>" + esc(r[0]) + "</dt><dd>" + tbc(r[1]) + "</dd></div>"; }).join("") + "</dl>" +
+        (has ? "" : '<p><span class="tbc">More specifications to be confirmed</span></p>');
     }
     function tbc(v) { return !v || v === "TBC" ? '<span class="tbc">to be confirmed</span>' : esc(v); }
     function note() {

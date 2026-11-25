@@ -151,8 +151,8 @@
     else if (p.badge) tags += '<span class="tag">' + esc(p.badge) + "</span>";
     if (p.placeholder) tags += '<span class="tag ph-flag">Placeholder</span>';
     var sw = p.colors.length > 1 ? '<div class="swatches" role="group" aria-label="Colours">' + p.colors.map(function (k, i) {
-      return '<button class="sw" style="--c:' + esc(k.hex) + '" data-ci="' + i + '" aria-pressed="' + (i === ci) + '" aria-label="' + esc(k.name) + '" title="' + esc(k.name) + '"></button>';
-    }).join("") + "</div>" : '<div class="swatches"><span class="sw" style="--c:' + esc(c.hex) + '" title="' + esc(c.name) + '"></span></div>';
+      return '<button class="sw" style="--c:' + esc(k.swatch || k.hex) + '" data-ci="' + i + '" aria-pressed="' + (i === ci) + '" aria-label="' + esc(k.name) + '" title="' + esc(k.name) + '"></button>';
+    }).join("") + "</div>" : '<div class="swatches"><span class="sw" style="--c:' + esc(c.swatch || c.hex) + '" title="' + esc(c.name) + '"></span></div>';
     return '<article class="card" data-id="' + esc(p.id) + '" data-ci="' + ci + '">' +
       '<div class="cm"><a class="card-media" href="product.html?p=' + esc(p.slug) + '" aria-label="' + esc(p.name) + '">' + tags +
       '<span class="media-main">' + imgOrPh(p, c, 0, "main") + '</span><span class="media-alt">' + imgOrPh(p, c, 1, "alt") + "</span></a>" +
