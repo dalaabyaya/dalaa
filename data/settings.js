@@ -33,7 +33,7 @@ window.DALAA_SETTINGS = {
   /* Links and contact details. Fill these in with your real ones. */
   contact: {
     email: "",                                   // e.g. "hello@yourdomain.com.au"
-    instagram: "https://www.instagram.com/",     // replace with your profile URL
+    instagram: "https://www.instagram.com/dalaabyaya/",
     tiktok: "https://www.tiktok.com/",           // replace with your profile URL
     location: "Melbourne, Victoria, Australia"
   },
