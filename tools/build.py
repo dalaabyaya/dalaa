@@ -21,6 +21,9 @@ ICON = {
 }
 
 def head(title, desc, extra="", bodyclass=""):
+    if not bodyclass:
+        bodyclass = ' class="story-dark home-dark"'
+        extra = STORY_EXTRA + '<link rel="stylesheet" href="css/home.css">\n' + extra
     return f"""<!doctype html>
 <html lang="en-AU" class="no-js">
 <head>
@@ -33,7 +36,7 @@ def head(title, desc, extra="", bodyclass=""):
 <meta property="og:description" content="{desc}">
 <meta property="og:type" content="website">
 <meta property="og:image" content="assets/img/logo-pink.png">
-<meta name="theme-color" content="#B00870">
+<meta name="theme-color" content="#140A1C">
 <link rel="icon" type="image/png" href="assets/img/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -46,7 +49,7 @@ def head(title, desc, extra="", bodyclass=""):
 <header class="header">
   <div class="wrap">
     <button class="icon-btn menu-btn" id="menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="nav">{ICON['menu']}</button>
-    <a class="brand" href="index.html" aria-label="Dalaa by Aya, home"><img src="assets/img/{'logo-story-sm.png' if 'story-dark' in bodyclass else 'logo-pink-sm.png'}" alt="Dalaa by Aya" width="{'132' if 'story-dark' in bodyclass else '133'}" height="{'140' if 'story-dark' in bodyclass else '140'}"></a>
+    <a class="brand" href="index.html" aria-label="Dalaa by Aya, home"><img src="assets/img/logo-story-sm.png" alt="Dalaa by Aya" width="{'132' if 'story-dark' in bodyclass else '133'}" height="{'140' if 'story-dark' in bodyclass else '140'}"></a>
     <nav class="nav" id="nav" aria-label="Main">
       <button class="icon-btn nav-close" id="nav-close" aria-label="Close menu">{ICON['close']}</button>
       <a href="index.html">Home</a><a href="shop.html">Shop</a><a href="story.html">Our Story</a>
@@ -98,7 +101,7 @@ def news_footer():
   <div class="wrap">
     <div class="cols">
       <div>
-        <span class="logo-card"><img src="assets/img/logo-pink-sm.png" alt="Dalaa by Aya" loading="lazy"></span>
+        <span class="logo-card"><img src="assets/img/logo-story-sm.png" alt="Dalaa by Aya" loading="lazy"></span>
         <p class="tagline">Modesty at your own accord.</p>
         <p style="font-size:14px;color:rgba(255,248,241,.75)" data-loc>Melbourne, Victoria, Australia</p>
       </div>
@@ -243,6 +246,14 @@ home = head("Dalaa by Aya | Handmade modest fashion, Melbourne",
       <blockquote>As a Muslim girl growing up in the West, alongside all the other challenges young diaspora face, came an unexpected one: shopping. Years later, I took matters into my own hands by creating what I wanted. Clothing at my own accord.</blockquote>
       <a class="btn btn-primary" href="story.html">Read our story</a>
     </div>
+  </div>
+</section>
+<section class="sign-home" aria-labelledby="sh-h">
+  <div class="wrap">
+    <span class="logo-sign sx"><img src="assets/img/logo-story.png" alt="Dalaa by Aya" width="870" height="916" loading="lazy"></span>
+    <h2 id="sh-h" class="sx" style="--d:1">Welcome to Dalaa, gorgeous.</h2>
+    <p class="sx" style="--d:2">Modest, but never ordinary.</p>
+    <a class="btn btn-primary btn-glow sx" style="--d:3" href="shop.html">Shop the collection</a>
   </div>
 </section>
 {newsletter()}

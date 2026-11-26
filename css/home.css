@@ -5,51 +5,52 @@
    then a few things are tuned by hand.
    ========================================================== */
 .home-dark{
-  --ivory:#0B0609; --cream:#14080F; --baby:#241019; --baby-deep:#3a1a2b;
-  --choc:#F6E7EE; --muted:rgba(246,231,238,.72); --line:rgba(248,136,208,.22);
-  --fuchsia:#F888D0; --black:#0B0609;
+  --ivory:#0A0710; --cream:#140A1C; --baby:#1E1230; --baby-deep:#33204F;
+  --choc:#EEE9F6; --muted:rgba(238,233,246,.72); --line:rgba(201,166,228,.22);
+  --fuchsia:#C9A6E4; --black:#0A0710;
+  --magenta:#6B2FA0; --hot:#9B5DE5; --bubble:#D9B8EE; --cherry:#5A0F22; --emerald:#0F6B4A; --teal:#1E9C97; --amber:#D9A45B;
 }
 .home-dark .hero,.home-dark .intro,.home-dark .s,.home-dark .energy{background:var(--noir)}
-.home-dark .hero{background:radial-gradient(70% 60% at 70% 20%,rgba(176,8,112,.32),transparent 70%),linear-gradient(180deg,#0B0609,#14080F)}
+.home-dark .hero{background:radial-gradient(70% 60% at 70% 20%,rgba(91,42,134,.32),transparent 70%),linear-gradient(180deg,#0A0710,#140A1C)}
 .home-dark .hero .wrap{position:relative;z-index:1}
-.home-dark .hero h1{color:var(--ink);text-shadow:0 0 60px rgba(255,77,176,.22)}
-.home-dark .hero h1 em,.home-dark .intro h2 em,.home-dark .story-prev h2 em{color:var(--glow);font-weight:400;text-shadow:0 0 22px rgba(248,136,208,.55)}
+.home-dark .hero h1{color:var(--ink);text-shadow:0 0 60px rgba(155,93,229,.22)}
+.home-dark .hero h1 em,.home-dark .intro h2 em,.home-dark .story-prev h2 em{color:var(--glow);font-weight:400;text-shadow:0 0 22px rgba(201,166,228,.55)}
 .home-dark .hero p.lead{color:var(--ink-dim)}
-.home-dark .script-float{color:var(--glow);text-shadow:0 0 16px rgba(248,136,208,.8),0 0 44px rgba(255,77,176,.55)}
-.home-dark .hero-visual .hero-photo{border-color:rgba(248,136,208,.6);box-shadow:0 0 0 1px rgba(248,136,208,.25),0 30px 80px -30px rgba(255,77,176,.55)}
+.home-dark .script-float{color:var(--glow);text-shadow:0 0 16px rgba(201,166,228,.8),0 0 44px rgba(155,93,229,.55)}
+.home-dark .hero-visual .hero-photo{border-color:rgba(201,166,228,.6);box-shadow:0 0 0 1px rgba(201,166,228,.25),0 30px 80px -30px rgba(155,93,229,.55)}
 .home-dark .hv-par{transform:translate3d(0,var(--py,0px),0);position:relative;z-index:1}
-.home-dark .badge-circle{background:#14080F;border:1px solid rgba(248,136,208,.55);color:var(--ink);box-shadow:0 0 34px rgba(255,77,176,.4);animation:slowspin 26s linear infinite}
+.home-dark .badge-circle{background:#140A1C;border:1px solid rgba(201,166,228,.55);color:var(--ink);box-shadow:0 0 34px rgba(155,93,229,.4);animation:slowspin 26s linear infinite}
 .home-dark .badge-circle>div{animation:slowspin 26s linear infinite reverse}
 @keyframes slowspin{to{transform:rotate(360deg)}}
-.home-dark .sticker{filter:drop-shadow(0 0 22px rgba(248,136,208,.7))}
-.home-dark .ticker{background:#070405;border-block:1px solid rgba(248,136,208,.25);color:var(--ink)}
-.home-dark .ticker span{text-shadow:0 0 18px rgba(248,136,208,.45)}
-.home-dark .btn-ghost{border-color:rgba(248,136,208,.7);color:var(--ink)}
-.home-dark .btn-ghost:hover{background:var(--glow);color:#14080F;border-color:var(--glow)}
-.home-dark .btn-primary{box-shadow:0 0 0 1px rgba(248,136,208,.6),0 0 34px rgba(255,77,176,.45)}
+.home-dark .sticker{filter:drop-shadow(0 0 22px rgba(201,166,228,.7))}
+.home-dark .ticker{background:#06040A;border-block:1px solid rgba(201,166,228,.25);color:var(--ink)}
+.home-dark .ticker span{text-shadow:0 0 18px rgba(201,166,228,.45)}
+.home-dark .btn-ghost{border-color:rgba(201,166,228,.7);color:var(--ink)}
+.home-dark .btn-ghost:hover{background:var(--glow);color:#140A1C;border-color:var(--glow)}
+.home-dark .btn-primary{box-shadow:0 0 0 1px rgba(201,166,228,.6),0 0 34px rgba(155,93,229,.45)}
 .home-dark .link-u{color:var(--ink)}
 .home-dark .s-head h2,.home-dark .intro h2{color:var(--ink)}
-.home-dark .kicker-script{color:var(--glow);text-shadow:0 0 14px rgba(248,136,208,.7)}
+.home-dark .kicker-script{color:var(--glow);text-shadow:0 0 14px rgba(201,166,228,.7)}
 .home-dark .intro{position:relative;overflow:hidden}
 .home-dark .intro .wrap{position:relative;z-index:1}
 .home-dark .intro p{color:var(--ink-dim)}
 .home-dark .intro .closing{color:var(--ink);font-size:clamp(30px,4.4vw,56px);line-height:1.15;max-width:18ch;margin-inline:auto}
-.home-dark .frame-orn{filter:drop-shadow(0 0 20px rgba(248,136,208,.6));opacity:.7}
+.home-dark .frame-orn{filter:drop-shadow(0 0 20px rgba(201,166,228,.6));opacity:.7}
 .d-intro{width:300px;right:5%;top:10%}
 .home-dark .energy{position:relative}
-.home-dark .tile.t1{background:linear-gradient(135deg,#B00870,#7a0650);box-shadow:0 0 60px -18px rgba(255,77,176,.6)}
-.home-dark .tile.t2{background:#1d0c16;border:1px solid rgba(248,136,208,.3);color:var(--ink)}
-.home-dark .tile.t5{background:#0f0709;border:1px solid rgba(248,136,208,.3)}
-.home-dark .tile.t6{background:linear-gradient(90deg,#4d0c20,#B3122E)}
+.home-dark .tile.t1{background:linear-gradient(135deg,#6B2FA0,#3a1763);box-shadow:0 0 60px -18px rgba(155,93,229,.6)}
+.home-dark .tile.t2{background:#10261f;border-color:rgba(30,156,151,.4)!important;border:1px solid rgba(201,166,228,.3);color:var(--ink)}
+.home-dark .tile.t5{background:#0B0812;border:1px solid rgba(201,166,228,.3)}
+.home-dark .tile.t6{background:linear-gradient(90deg,#3d0a1a,#7a1230)}
 .home-dark .tile{transition:transform .6s var(--ease),box-shadow .6s}
-.home-dark .tile:hover{transform:translateY(-6px);box-shadow:0 0 50px -10px rgba(255,77,176,.55)}
-.home-dark .story-prev .vis .logo-b{background:transparent;box-shadow:none;filter:invert(1) drop-shadow(0 0 16px rgba(248,136,208,.7))}
-.home-dark .story-prev .vis .arch{border-color:rgba(248,136,208,.55);box-shadow:0 0 70px -20px rgba(255,77,176,.6)}
+.home-dark .tile:hover{transform:translateY(-6px);box-shadow:0 0 50px -10px rgba(155,93,229,.55)}
+.home-dark .story-prev .vis .logo-b{background:transparent;box-shadow:none;filter:invert(1) drop-shadow(0 0 16px rgba(201,166,228,.7))}
+.home-dark .story-prev .vis .arch{border-color:rgba(201,166,228,.55);box-shadow:0 0 70px -20px rgba(155,93,229,.6)}
 .home-dark .story-prev blockquote{border-left-color:var(--neon);color:var(--ink-dim)}
 .home-dark .story-prev,.home-dark .story-prev .wrap{color:var(--ink)}
 .home-dark .card-name a,.home-dark .price{color:var(--ink)}
 .home-dark .sw{box-shadow:0 0 0 1px rgba(255,255,255,.3)}
-.home-dark .card-media{box-shadow:.6px .6px 0 #2a2226,1.2px 1.2px 0 #cfc8bf,1.8px 1.8px 0 #2a2226,2.4px 2.4px 0 #bdb5aa,3px 3px 0 #2a2226,3.6px 3.6px 0 #a79e93,0 24px 50px -16px rgba(255,77,176,.4)}
+.home-dark .card-media{box-shadow:.6px .6px 0 #2a2226,1.2px 1.2px 0 #cfc8bf,1.8px 1.8px 0 #2a2226,2.4px 2.4px 0 #bdb5aa,3px 3px 0 #2a2226,3.6px 3.6px 0 #a79e93,0 24px 50px -16px rgba(155,93,229,.4)}
 .home-dark .lw,.home-dark .lit .lw{display:inline-block}
 .home-dark #main{overflow-x:clip}
 
@@ -68,4 +69,15 @@
 .home-dark .tile.t1,.home-dark .tile.t6{color:#fff}
 .home-dark .tile.t2,.home-dark .tile.t5{color:var(--ink)}
 .home-dark .intro .closing{text-wrap:balance}
-.home-dark .tile.t1 h3 em{color:#FBDDEA}
+.home-dark .tile.t1 h3 em{color:#E4D4F4}
+
+/* the whole site is dark now: logo cards and light patches go away */
+.home-dark .logo-card{background:transparent;padding:0;box-shadow:none}
+.home-dark .logo-card img{height:120px;width:auto}
+.home-dark .announce{background:linear-gradient(90deg,#3a1763,#5A0F22,#3a1763)}
+.sign-home{position:relative;overflow:hidden;text-align:center;padding:clamp(90px,12vw,170px) 0;background:radial-gradient(60% 70% at 50% 40%,rgba(107,47,160,.4),transparent 70%),#0A0710}
+.sign-home .wrap{position:relative;z-index:1}
+.sign-home .logo-sign{display:block;width:min(340px,70vw);margin:0 auto 26px;filter:drop-shadow(0 0 34px rgba(155,93,229,.55))}
+.sign-home .logo-sign img{width:100%;height:auto;animation:glowpulse 5s ease-in-out infinite}
+.sign-home h2{font-size:clamp(34px,5vw,64px);color:var(--ink);margin-bottom:12px}
+.sign-home p{color:var(--ink-dim);margin:0 0 28px}
