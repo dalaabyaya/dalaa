@@ -104,7 +104,7 @@ def news_footer():
       </div>
       <div><h4>Explore</h4><ul><li><a href="shop.html">Shop</a></li><li><a href="story.html">Our Story</a></li><li><a href="info.html#contact">Contact</a></li></ul></div>
       <div><h4>Help</h4><ul><li><a href="info.html#shipping">Shipping &amp; Returns</a></li><li><a href="info.html#faqs">FAQs</a></li></ul>
-        <div class="social" style="margin-top:22px"><a data-social="instagram" href="#" rel="noopener" target="_blank">Instagram</a><a data-social="tiktok" href="#" rel="noopener" target="_blank">TikTok</a></div></div>
+        <div class="social" style="margin-top:22px"><a data-social="instagram" href="#" rel="noopener" target="_blank">Instagram</a></div></div>
       <div><h4>Letters from Dalaa</h4>
         <form class="nform-s" data-newsletter novalidate><label class="sr-only" for="fn-email">Email address</label><input id="fn-email" type="email" name="email" placeholder="Your email" autocomplete="email"><button type="submit">Join</button></form>
         <p class="form-msg" role="status" aria-live="polite"></p></div>
@@ -403,7 +403,7 @@ info = head("Contact, Shipping & FAQs | Dalaa by Aya",
     <button class="btn btn-primary" type="submit">Send message</button>
     <p class="form-msg" id="contact-msg" role="status" aria-live="polite"></p>
   </form>
-  <p style="margin-top:18px">Or say hi on <a class="link-u" style="font-size:12px" data-social="instagram" target="_blank" rel="noopener" href="#">Instagram</a> or <a class="link-u" style="font-size:12px" data-social="tiktok" target="_blank" rel="noopener" href="#">TikTok</a>.</p>
+  <p style="margin-top:18px">Or say hi on <a class="link-u" style="font-size:12px" data-social="instagram" target="_blank" rel="noopener" href="#">Instagram</a>.</p>
 </section>
 
 <section id="shipping"><h2>Shipping &amp; returns</h2>

@@ -35,7 +35,7 @@ Logos: `assets/img/logo-pink*.png` (primary) and `assets/img/logo-black*.png` (a
 3. **Accounts.** The account icon explains accounts arrive with the store platform.
 4. **Products.** All six products are labelled placeholders with no prices. Prices show "Price TBC".
 5. **"To be confirmed" tags** appear for shipping times/costs, returns and size measurements until you fill them in.
-6. **Social links** currently point to the Instagram and TikTok home pages. Add your real profile URLs.
+6. **Social links** link to Instagram (@dalaabyaya).
 
 ## Recommended platform: Shopify
 
