@@ -596,3 +596,22 @@ html.cut-wait::after{content:"";position:fixed;inset:0;z-index:9998;background:#
 .mag-count{font-size:11px;letter-spacing:.3em;color:var(--muted)}.mag-count b{font-family:var(--serif);font-weight:400;font-size:22px;letter-spacing:.1em;color:var(--choc,#2b1612)}
 .mag:focus-visible{outline:none}
 @media (prefers-reduced-motion:reduce){.pg.fo,.pg.fb{animation:none}}
+
+/* ---- Vogue-style covers: full-width masthead, cover lines, barcode ---- */
+.card-media{container-type:inline-size}
+.cm .tag:not(.ph-flag){display:none}
+.cm .tag.ph-flag{display:none}
+.cv-mast{position:absolute;z-index:2;left:1cqw;right:1cqw;top:6.5cqw;width:98cqw;height:auto;overflow:visible;fill:#fff;
+  font-family:"Bodoni Moda","Playfair Display","Didot","Bodoni 72",var(--serif);font-weight:400;filter:drop-shadow(0 1px 14px rgba(0,0,0,.35))}
+.cv-by{position:absolute;z-index:2;right:7cqw;top:30cqw;font-family:var(--script);font-size:9.5cqw;line-height:1;color:#FF7EC8;transform:rotate(-5deg);text-shadow:0 1px 10px rgba(0,0,0,.55)}
+.cv-date{position:absolute;z-index:2;left:6cqw;right:6cqw;top:3.4cqw;display:flex;justify-content:space-between;font-size:2.5cqw;letter-spacing:.22em;text-transform:uppercase;color:#fff;opacity:.92}
+.cv-lines{position:absolute;z-index:2;left:6cqw;bottom:14cqw;width:72%;color:#fff;display:block;line-height:1}
+.cv-lines small{display:block;font-size:3cqw;letter-spacing:.26em;text-transform:uppercase;margin-bottom:2.4cqw;opacity:.95}
+.cv-lines b{display:block;font-family:"Bodoni Moda","Playfair Display","Didot",var(--serif);font-weight:400;font-size:11.5cqw;line-height:.98;letter-spacing:-.01em;text-shadow:0 2px 22px rgba(0,0,0,.45)}
+.cv-lines i{display:block;font-style:normal;font-size:3.4cqw;letter-spacing:.24em;margin-top:3cqw}
+.cv-code{position:absolute;z-index:2;right:6cqw;bottom:5cqw;width:19cqw;padding:1.2cqw 1.4cqw .6cqw;background:#fff;text-align:center;line-height:1}
+.cv-code span{display:block;height:7cqw;background:repeating-linear-gradient(90deg,#111 0 .5cqw,#fff .5cqw .9cqw,#111 .9cqw 1.9cqw,#fff 1.9cqw 2.3cqw,#111 2.3cqw 2.6cqw,#fff 2.6cqw 3.4cqw)}
+.cv-code em{display:block;font-style:normal;font-family:var(--sans);font-size:1.7cqw;letter-spacing:.14em;color:#111;margin-top:.5cqw}
+.leaf-front:before{background:linear-gradient(180deg,rgba(8,6,6,.5),rgba(8,6,6,0) 30%,rgba(8,6,6,0) 48%,rgba(8,6,6,.7))}
+.cv-frame{display:none}
+.card.is-ph .cv-lines b{font-style:italic}

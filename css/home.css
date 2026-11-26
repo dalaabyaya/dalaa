@@ -1,0 +1,71 @@
+/* ==========================================================
+   HOME in the dark: same velvet look as Our Story.
+   Loaded after story.css on index.html; everything is scoped to .home-dark.
+   Flipping the palette variables turns most of the shop dark in one go,
+   then a few things are tuned by hand.
+   ========================================================== */
+.home-dark{
+  --ivory:#0B0609; --cream:#14080F; --baby:#241019; --baby-deep:#3a1a2b;
+  --choc:#F6E7EE; --muted:rgba(246,231,238,.72); --line:rgba(248,136,208,.22);
+  --fuchsia:#F888D0; --black:#0B0609;
+}
+.home-dark .hero,.home-dark .intro,.home-dark .s,.home-dark .energy{background:var(--noir)}
+.home-dark .hero{background:radial-gradient(70% 60% at 70% 20%,rgba(176,8,112,.32),transparent 70%),linear-gradient(180deg,#0B0609,#14080F)}
+.home-dark .hero .wrap{position:relative;z-index:1}
+.home-dark .hero h1{color:var(--ink);text-shadow:0 0 60px rgba(255,77,176,.22)}
+.home-dark .hero h1 em,.home-dark .intro h2 em,.home-dark .story-prev h2 em{color:var(--glow);font-weight:400;text-shadow:0 0 22px rgba(248,136,208,.55)}
+.home-dark .hero p.lead{color:var(--ink-dim)}
+.home-dark .script-float{color:var(--glow);text-shadow:0 0 16px rgba(248,136,208,.8),0 0 44px rgba(255,77,176,.55)}
+.home-dark .hero-visual .hero-photo{border-color:rgba(248,136,208,.6);box-shadow:0 0 0 1px rgba(248,136,208,.25),0 30px 80px -30px rgba(255,77,176,.55)}
+.home-dark .hv-par{transform:translate3d(0,var(--py,0px),0);position:relative;z-index:1}
+.home-dark .badge-circle{background:#14080F;border:1px solid rgba(248,136,208,.55);color:var(--ink);box-shadow:0 0 34px rgba(255,77,176,.4);animation:slowspin 26s linear infinite}
+.home-dark .badge-circle>div{animation:slowspin 26s linear infinite reverse}
+@keyframes slowspin{to{transform:rotate(360deg)}}
+.home-dark .sticker{filter:drop-shadow(0 0 22px rgba(248,136,208,.7))}
+.home-dark .ticker{background:#070405;border-block:1px solid rgba(248,136,208,.25);color:var(--ink)}
+.home-dark .ticker span{text-shadow:0 0 18px rgba(248,136,208,.45)}
+.home-dark .btn-ghost{border-color:rgba(248,136,208,.7);color:var(--ink)}
+.home-dark .btn-ghost:hover{background:var(--glow);color:#14080F;border-color:var(--glow)}
+.home-dark .btn-primary{box-shadow:0 0 0 1px rgba(248,136,208,.6),0 0 34px rgba(255,77,176,.45)}
+.home-dark .link-u{color:var(--ink)}
+.home-dark .s-head h2,.home-dark .intro h2{color:var(--ink)}
+.home-dark .kicker-script{color:var(--glow);text-shadow:0 0 14px rgba(248,136,208,.7)}
+.home-dark .intro{position:relative;overflow:hidden}
+.home-dark .intro .wrap{position:relative;z-index:1}
+.home-dark .intro p{color:var(--ink-dim)}
+.home-dark .intro .closing{color:var(--ink);font-size:clamp(30px,4.4vw,56px);line-height:1.15;max-width:18ch;margin-inline:auto}
+.home-dark .frame-orn{filter:drop-shadow(0 0 20px rgba(248,136,208,.6));opacity:.7}
+.d-intro{width:300px;right:5%;top:10%}
+.home-dark .energy{position:relative}
+.home-dark .tile.t1{background:linear-gradient(135deg,#B00870,#7a0650);box-shadow:0 0 60px -18px rgba(255,77,176,.6)}
+.home-dark .tile.t2{background:#1d0c16;border:1px solid rgba(248,136,208,.3);color:var(--ink)}
+.home-dark .tile.t5{background:#0f0709;border:1px solid rgba(248,136,208,.3)}
+.home-dark .tile.t6{background:linear-gradient(90deg,#4d0c20,#B3122E)}
+.home-dark .tile{transition:transform .6s var(--ease),box-shadow .6s}
+.home-dark .tile:hover{transform:translateY(-6px);box-shadow:0 0 50px -10px rgba(255,77,176,.55)}
+.home-dark .story-prev .vis .logo-b{background:transparent;box-shadow:none;filter:invert(1) drop-shadow(0 0 16px rgba(248,136,208,.7))}
+.home-dark .story-prev .vis .arch{border-color:rgba(248,136,208,.55);box-shadow:0 0 70px -20px rgba(255,77,176,.6)}
+.home-dark .story-prev blockquote{border-left-color:var(--neon);color:var(--ink-dim)}
+.home-dark .story-prev,.home-dark .story-prev .wrap{color:var(--ink)}
+.home-dark .card-name a,.home-dark .price{color:var(--ink)}
+.home-dark .sw{box-shadow:0 0 0 1px rgba(255,255,255,.3)}
+.home-dark .card-media{box-shadow:.6px .6px 0 #2a2226,1.2px 1.2px 0 #cfc8bf,1.8px 1.8px 0 #2a2226,2.4px 2.4px 0 #bdb5aa,3px 3px 0 #2a2226,3.6px 3.6px 0 #a79e93,0 24px 50px -16px rgba(255,77,176,.4)}
+.home-dark .lw,.home-dark .lit .lw{display:inline-block}
+.home-dark #main{overflow-x:clip}
+
+/* scroll-driven motion, where the browser supports it (everything is simply visible where it does not) */
+@supports (animation-timeline:view()){
+  @keyframes cardRise{from{opacity:0;transform:translateY(60px) scale(.94)}to{opacity:1;transform:none}}
+  @keyframes tilePop{from{opacity:0;transform:translateY(40px) scale(.92)}to{opacity:1;transform:none}}
+  @keyframes hdrSlide{from{opacity:0;transform:translateX(-40px)}to{opacity:1;transform:none}}
+  .home-dark .card{animation:cardRise linear both;animation-timeline:view();animation-range:entry 0% entry 75%}
+  .home-dark .tile{animation:tilePop linear both;animation-timeline:view();animation-range:entry 0% entry 70%}
+  .home-dark .s-head{animation:hdrSlide linear both;animation-timeline:view();animation-range:entry 0% entry 60%}
+}
+@media (prefers-reduced-motion:reduce){.home-dark .card,.home-dark .tile,.home-dark .s-head{animation:none}.home-dark .badge-circle,.home-dark .badge-circle>div{animation:none}}
+@media (max-width:860px){.d-intro{width:170px}}
+.home-dark .tile h3{color:inherit}
+.home-dark .tile.t1,.home-dark .tile.t6{color:#fff}
+.home-dark .tile.t2,.home-dark .tile.t5{color:var(--ink)}
+.home-dark .intro .closing{text-wrap:balance}
+.home-dark .tile.t1 h3 em{color:#FBDDEA}

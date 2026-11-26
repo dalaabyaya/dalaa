@@ -158,8 +158,12 @@
       '<div class="cm"><a class="card-media" href="product.html?p=' + esc(p.slug) + '" aria-label="' + esc(p.name) + '">' + tags +
       '<span class="media-alt">' + imgOrPh(p, c, 1, "alt") + "</span>" +
       '<span class="leaf"><span class="leaf-front"><span class="media-main">' + imgOrPh(p, c, 0, "main") + "</span>" +
-      '<span class="cv-top"><span class="cv-mast">DALAA</span><span class="cv-by">by aya</span></span>' +
-      '<span class="cv-frame"></span><span class="cv-no">No. ' + no + '</span><span class="cv-type">' + esc(p.type) + "</span></span>" +
+      '<svg class="cv-mast" viewBox="0 0 100 27" aria-hidden="true"><text x="50" y="23" text-anchor="middle" textLength="98" lengthAdjust="spacingAndGlyphs">DALAA</text></svg>' +
+      '<span class="cv-by">by aya</span>' +
+      '<span class="cv-date"><span>Melbourne · Issue ' + no + '</span><span>' + (p.badge ? esc(p.badge) : "The Edit") + "</span></span>" +
+      '<span class="cv-lines"><small>' + esc(p.type) + "</small><b>" + (p.placeholder ? "Coming soon" : esc(p.name)) + "</b>" +
+      (p.price ? "<i>$" + Math.round(p.price) + "</i>" : "") + "</span>" +
+      '<span class="cv-code" aria-hidden="true"><span></span><em>DALAA ' + no + "</em></span></span>" +
       '<span class="leaf-back"></span></span></a>' +
       '<div class="quick">' + (sold ? '<button class="quick-btn" disabled>Sold out</button>' : '<button class="quick-btn" data-act="qa">Quick add</button>') + "</div></div>" +
       '<div class="card-info"><h3 class="card-name"><a href="product.html?p=' + esc(p.slug) + '">' + esc(p.name) + "</a></h3>" +

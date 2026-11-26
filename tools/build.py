@@ -9,7 +9,7 @@ import re
 import hashlib
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-FONTS = ("https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&family=Birthstone&"
+FONTS = ("https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&family=Birthstone&family=Bodoni+Moda:ital,wght@0,400;0,600;1,400&"
          "family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@400;500&display=swap")
 
 ICON = {
@@ -152,52 +152,78 @@ def write(name, html):
     with open(os.path.join(ROOT, name), "w", encoding="utf-8") as f:
         f.write(html)
 
+def words(text, start=0):
+    return " ".join(f'<span class="w" style="--i:{start + i}"><span>{w}</span></span>' for i, w in enumerate(text.split()))
+
+_r = random.Random(11)
+sparks = "".join(
+    f'<i class="spark" style="left:{_r.randint(4, 96)}%;top:{_r.randint(6, 90)}%;--s:{_r.choice([2, 3, 3, 4])}px;'
+    f'--t:{_r.uniform(3, 6.5):.1f}s;--dl:{_r.uniform(0, 5):.1f}s"></i>' for _ in range(22))
+
+def drift(cls, speed, rot, r0, o, style=""):
+    return (f'<span class="drift {cls}" data-speed="{speed}" data-rot="{rot}" aria-hidden="true" style="{style}">'
+            f'<img src="assets/img/kiss-glow.png" alt="" style="--r0:{r0}deg;--o:{o}"></span>')
+
+STORY_EXTRA = ('<link rel="stylesheet" href="css/story.css">\n'
+               '<script>(function(){var d=document.documentElement;d.classList.add("story-ready");'
+               'if(window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches)d.classList.add("story-calm");'
+               'setTimeout(function(){if(!window.__storyOK)d.classList.remove("story-ready")},3500)})()</script>\n')
+
+
 # ------------------------------------------------------------------ HOME
 phrases = ["Modest, but never ordinary", "Handmade in Melbourne", "A little extra never hurt", "Blending in was never an option", "Pretty things for girls with personality"]
 tick = "".join(f'<span>{p}</span><img src="assets/img/kiss.png" alt="">' for p in phrases)
 
 home = head("Dalaa by Aya | Handmade modest fashion, Melbourne",
-            "Handmade modest clothing from Melbourne. Dresses and full-length tops with more colour, more character and more you. Modesty at your own accord.") + f"""
+            "Handmade modest clothing from Melbourne. Dresses and full-length tops with more colour, more character and more you. Modesty at your own accord.",
+            extra=STORY_EXTRA + '<link rel="stylesheet" href="css/home.css">\n', bodyclass=' class="story-dark home-dark"') + f"""
+<div class="thread" aria-hidden="true"><i></i></div>
+<div class="spot" aria-hidden="true"></div>
 <main id="main">
 <section class="hero">
+  <div class="glow g1" aria-hidden="true"></div><div class="glow g2" aria-hidden="true"></div>
+  {sparks}
+  {drift("d-hero-a", 0.16, 18, -12, 0.3)}{drift("d-hero-b", -0.1, -14, 14, 0.24)}
   <div class="wrap">
-    <div class="rv">
+    <div class="sx">
       <span class="eyebrow">Handmade modest fashion · Melbourne</span>
-      <h1>Modesty at your own <em>accord.</em></h1>
-      <p class="lead">For the girls who like a little extra. Modest, but never ordinary.</p>
-      <div class="ctas"><a class="btn btn-primary" href="shop.html">Shop the collection</a><a class="link-u" href="story.html">Get to know Dalaa</a></div>
+      <h1 class="sx split" aria-label="Modesty at your own accord.">{words("Modesty at your own")} <em>{words("accord.", 4)}</em></h1>
+      <p class="lead sx" style="--d:3">For the girls who like a little extra. Modest, but never ordinary.</p>
+      <div class="ctas sx" style="--d:4"><a class="btn btn-primary" href="shop.html">Shop the collection</a><a class="link-u" href="story.html">Get to know Dalaa</a></div>
     </div>
-    <div class="hero-visual rv">
+    <div class="hv-par" data-speed="-0.05"><div class="hero-visual sx" style="--d:2">
       <span class="script script-float" style="font-size:58px">gorgeous</span>
       {ph("hero", "Campaign photo goes here", "hero-photo", "Sewing pattern laid out on a table (placeholder photo)")}
       <img class="sticker" src="assets/img/kiss.png" alt="">
       <div class="badge-circle"><div><b>handmade</b>in Melbourne</div></div>
-    </div>
+    </div></div>
   </div>
 </section>
 <div class="ticker" aria-hidden="true"><div class="ticker-track">{tick}{tick}{tick}{tick}</div></div>
 
 <section class="intro">
+  <div class="glow g3" aria-hidden="true"></div>
+  {drift("d-intro", 0.12, 10, 10, 0.22)}
   <img class="frame-orn l" src="assets/img/kiss.png" alt=""><img class="frame-orn r" src="assets/img/kiss.png" alt="">
-  <div class="wrap rv">
+  <div class="wrap sx">
     <span class="eyebrow">Meet Dalaa · <span class="arabic" style="font-size:18px;letter-spacing:0">دلع</span></span>
-    <h2 style="margin-top:20px">Not your usual <em>modest</em> wardrobe.</h2>
+    <h2 style="margin-top:20px" class="sx split" aria-label="Not your usual modest wardrobe.">{words("Not your usual")} <em>{words("modest", 3)}</em> {words("wardrobe.", 4)}</h2>
     <p>We believe modesty should never come at the expense of self-expression. Dalaa was created for the girls who want more character and individuality in their wardrobe.</p>
-    <p class="closing">Modesty is a journey, let DALAA be part of it</p>
+    <p class="closing lit">Modesty is a journey, let DALAA be part of it</p>
   </div>
 </section>
 
 <section class="s" style="padding-top:20px" aria-labelledby="coll-h">
   <div class="wrap">
-    <div class="s-head rv"><div><span class="script kicker-script">a little treat for yourself</span><h2 id="coll-h">Shop the collection</h2></div><a class="btn btn-ghost" href="shop.html">Shop all</a></div>
+    <div class="s-head sx"><div><span class="script kicker-script">a little treat for yourself</span><h2 id="coll-h">Shop the collection</h2></div><a class="btn btn-ghost" href="shop.html">Shop all</a></div>
     <div class="grid" id="featured-grid"></div>
   </div>
 </section>
 
 <section class="s energy" aria-labelledby="en-h">
   <div class="wrap">
-    <div class="center rv" style="margin-bottom:48px"><span class="eyebrow">A little Dalaa energy</span><h2 id="en-h" class="sr-only">A little Dalaa energy</h2></div>
-    <div class="bento rv">
+    <div class="center sx" style="margin-bottom:48px"><span class="eyebrow">A little Dalaa energy</span><h2 id="en-h" class="sr-only">A little Dalaa energy</h2></div>
+    <div class="bento sx">
       <div class="tile t1"><img class="kiss-d" src="assets/img/kiss.png" alt=""><h3><em>A little extra</em>never hurt.</h3></div>
       <div class="tile t2"><span class="script">Dalaa</span><h3>Covered, confident &amp; a little spoiled.</h3></div>
       <div class="tile t3">{ph("energyA", "Photo", "", "")}</div>
@@ -210,10 +236,10 @@ home = head("Dalaa by Aya | Handmade modest fashion, Melbourne",
 
 <section class="s story-prev" aria-labelledby="sp-h">
   <div class="wrap">
-    <div class="vis rv">{ph("storyPreview", "Your photo goes here", "arch", "Aya, founder of Dalaa")}<img class="logo-b" src="assets/img/logo-black-sm.png" alt="Dalaa in Arabic calligraphy, دلع" loading="lazy"></div>
-    <div class="rv">
+    <div class="vis sx">{ph("storyPreview", "Your photo goes here", "arch", "Aya, founder of Dalaa")}<img class="logo-b" src="assets/img/logo-black-sm.png" alt="Dalaa in Arabic calligraphy, دلع" loading="lazy"></div>
+    <div class="sx">
       <span class="eyebrow">Our story</span>
-      <h2 id="sp-h">It started with a <em>wardrobe</em> problem.</h2>
+      <h2 id="sp-h" class="sx split" aria-label="It started with a wardrobe problem.">{words("It started with a")} <em>{words("wardrobe", 4)}</em> {words("problem.", 5)}</h2>
       <blockquote>As a Muslim girl growing up in the West, alongside all the other challenges young diaspora face, came an unexpected one: shopping. Years later, I took matters into my own hands by creating what I wanted. Clothing at my own accord.</blockquote>
       <a class="btn btn-primary" href="story.html">Read our story</a>
     </div>
@@ -222,6 +248,7 @@ home = head("Dalaa by Aya | Handmade modest fashion, Melbourne",
 {newsletter()}
 </main>
 {news_footer()}
+<script src="js/story.js"></script>
 {chrome_layers()}
 </body></html>
 """
@@ -284,23 +311,6 @@ product = head("Product | Dalaa by Aya",
 write("product.html", product)
 
 # ------------------------------------------------------------------ STORY
-def words(text, start=0):
-    return " ".join(f'<span class="w" style="--i:{start + i}"><span>{w}</span></span>' for i, w in enumerate(text.split()))
-
-_r = random.Random(11)
-sparks = "".join(
-    f'<i class="spark" style="left:{_r.randint(4, 96)}%;top:{_r.randint(6, 90)}%;--s:{_r.choice([2, 3, 3, 4])}px;'
-    f'--t:{_r.uniform(3, 6.5):.1f}s;--dl:{_r.uniform(0, 5):.1f}s"></i>' for _ in range(22))
-
-def drift(cls, speed, rot, r0, o, style=""):
-    return (f'<span class="drift {cls}" data-speed="{speed}" data-rot="{rot}" aria-hidden="true" style="{style}">'
-            f'<img src="assets/img/kiss-glow.png" alt="" style="--r0:{r0}deg;--o:{o}"></span>')
-
-STORY_EXTRA = ('<link rel="stylesheet" href="css/story.css">\n'
-               '<script>(function(){var d=document.documentElement;d.classList.add("story-ready");'
-               'if(window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches)d.classList.add("story-calm");'
-               'setTimeout(function(){if(!window.__storyOK)d.classList.remove("story-ready")},3500)})()</script>\n')
-
 story = head("Our Story | Dalaa by Aya",
              "Dalaa by Aya started with a wardrobe problem: stylish, full-coverage clothes that weren't beige. Read why Aya started making what she wanted to wear.",
              extra=STORY_EXTRA, bodyclass=' class="story-dark"') + f"""
