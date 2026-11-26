@@ -9,7 +9,7 @@
   function store(set) { try { if (set) sessionStorage.setItem(KEY, "1"); else sessionStorage.removeItem(KEY); } catch (e) {} }
   function has() { try { return sessionStorage.getItem(KEY) === "1"; } catch (e) { return false; } }
 
-  var SHEARS = '<div class="cut-shears"><img src="assets/img/scissors.png" alt="" width="97" height="280"></div>';
+  var SHEARS = '<div class="cut-shears"><div class="sc"><img class="a" src="assets/img/shears-a.png" alt=""><img class="b" src="assets/img/shears-b.png" alt=""></div></div>';
 
   function build() {
     var d = document.createElement("div");
@@ -23,7 +23,7 @@
   function reveal() {
     var d = build(), L = d.querySelector(".silk.l"), R = d.querySelector(".silk.r"), S = d.querySelector(".cut-shears");
     root.classList.remove("cut-wait");
-    var H = window.innerHeight, t0 = null, dur = 1500, tip = 280;
+    var H = window.innerHeight, t0 = null, dur = 1500, tip = 300;
     function ease(t) { return t < .5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2; }
     function frame(ts) {
       if (t0 === null) t0 = ts;
