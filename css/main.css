@@ -495,3 +495,29 @@ table.sg th{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:va
 }
 
 .card.is-ph .cv-type{display:none}
+
+/* ---- Shop transition: gold shears cut white silk, which falls away ---- */
+.cut{position:fixed;inset:0;z-index:9999;pointer-events:none;overflow:hidden}
+.cut .silk{position:absolute;top:0;bottom:0;width:50%;background-size:200% 100%;
+  background-image:
+    linear-gradient(100deg,rgba(255,255,255,0) 0,rgba(255,255,255,.75) 6%,rgba(120,100,90,.07) 12%,rgba(255,255,255,.8) 19%,rgba(120,100,90,.06) 27%,rgba(255,255,255,.7) 35%,rgba(120,100,90,.08) 44%,rgba(255,255,255,.85) 52%,rgba(120,100,90,.06) 61%,rgba(255,255,255,.7) 70%,rgba(120,100,90,.07) 79%,rgba(255,255,255,.8) 88%,rgba(255,255,255,0) 100%),
+    linear-gradient(180deg,#fdfcfa,#f3eee8 55%,#fcfaf7);
+  transition:transform 1.15s cubic-bezier(.55,.05,.8,.5),opacity .9s ease .25s}
+.cut .silk.l{left:0;background-position:0 0;transform-origin:0 0}
+.cut .silk.r{right:0;background-position:100% 0;transform-origin:100% 0}
+.cut-shears{position:absolute;left:50%;top:0;transform:translate(-50%,-300px);filter:drop-shadow(0 6px 10px rgba(60,40,10,.45));will-change:transform}
+.cut-shears .blade{transform-origin:50px 120px}
+.cut-shears .a{animation:snipA .3s ease-in-out infinite}
+.cut-shears .b{animation:snipB .3s ease-in-out infinite}
+@keyframes snipA{0%,100%{transform:rotate(9deg)}50%{transform:rotate(0)}}
+@keyframes snipB{0%,100%{transform:rotate(-9deg)}50%{transform:rotate(0)}}
+.cut.fall .silk.l{transform:translate(-14%,70%) rotate(-24deg);opacity:0}
+.cut.fall .silk.r{transform:translate(14%,70%) rotate(24deg);opacity:0}
+.cut.fall .cut-shears{transition:transform 1s ease-in,opacity .6s;opacity:0}
+.cut.cover .silk{animation:silkIn .4s ease-out both}
+@keyframes silkIn{from{opacity:0}to{opacity:1}}
+.cut.cover .cut-shears{display:none}
+/* While the shop page loads, a plain silk sheet holds the screen so nothing flashes. */
+html.cut-wait::after{content:"";position:fixed;inset:0;z-index:9998;background:#f7f3ee;animation:cutwait 0s 5s forwards}
+@keyframes cutwait{to{opacity:0;visibility:hidden}}
+@media (prefers-reduced-motion:reduce){.cut{display:none}html.cut-wait::after{display:none}}

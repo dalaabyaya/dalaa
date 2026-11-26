@@ -25,6 +25,7 @@ def head(title, desc, extra="", bodyclass=""):
 <html lang="en-AU" class="no-js">
 <head>
 <meta charset="utf-8">
+<script>try{{if(sessionStorage.getItem("dalaaCut")&&!(window.matchMedia&&matchMedia("(prefers-reduced-motion:reduce)").matches))document.documentElement.className+=" cut-wait"}}catch(e){{}}</script>
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{title}</title>
 <meta name="description" content="{desc}">
@@ -113,6 +114,7 @@ def news_footer():
 </footer>
 <script src="data/settings.js"></script>
 <script src="data/products.js"></script>
+<script src="js/cut.js"></script>
 <script src="js/app.js"></script>
 """
 
