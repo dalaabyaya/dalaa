@@ -159,7 +159,7 @@
       '<span class="media-alt">' + imgOrPh(p, c, 1, "alt") + "</span>" +
       '<span class="leaf"><span class="leaf-front"><span class="media-main">' + imgOrPh(p, c, 0, "main") + "</span>" +
       '<span class="cv-top"><span class="cv-mast">DALAA</span><span class="cv-by">by aya</span></span>' +
-      '<span class="cv-no">No. ' + no + '</span><span class="cv-type">' + esc(p.type) + "</span></span>" +
+      '<span class="cv-frame"></span><span class="cv-no">No. ' + no + '</span><span class="cv-type">' + esc(p.type) + "</span></span>" +
       '<span class="leaf-back"></span></span></a>' +
       '<div class="quick">' + (sold ? '<button class="quick-btn" disabled>Sold out</button>' : '<button class="quick-btn" data-act="qa">Quick add</button>') + "</div></div>" +
       '<div class="card-info"><h3 class="card-name"><a href="product.html?p=' + esc(p.slug) + '">' + esc(p.name) + "</a></h3>" +

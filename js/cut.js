@@ -1,4 +1,4 @@
-/* Shop transition: gold shears cut down the middle of a sheet of white silk,
+/* Shop transition: tailor's shears cut down the middle of a sheet of white silk,
    and the two halves fall away on either side to reveal the shop page.
    Click "Shop" -> silk covers the screen -> shop page loads -> shears cut -> silk falls. */
 (function () {
@@ -9,13 +9,7 @@
   function store(set) { try { if (set) sessionStorage.setItem(KEY, "1"); else sessionStorage.removeItem(KEY); } catch (e) {} }
   function has() { try { return sessionStorage.getItem(KEY) === "1"; } catch (e) { return false; } }
 
-  var SHEARS = '<svg class="cut-shears" viewBox="0 0 100 270" width="86" height="232" aria-hidden="true">' +
-    '<defs><linearGradient id="gld" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFF3BF"/><stop offset=".45" stop-color="#E2B93B"/><stop offset="1" stop-color="#8E6713"/></linearGradient></defs>' +
-    '<g class="blade a"><circle cx="30" cy="40" r="17" fill="none" stroke="url(#gld)" stroke-width="9"/>' +
-    '<path d="M36 55 L47 118 L47 122 L44.5 256 L53 122 L55 116 L46 118 Z" fill="url(#gld)" stroke="#8E6713" stroke-width="1"/></g>' +
-    '<g class="blade b"><circle cx="70" cy="40" r="17" fill="none" stroke="url(#gld)" stroke-width="9"/>' +
-    '<path d="M64 55 L53 118 L53 122 L55.5 256 L47 122 L45 116 L54 118 Z" fill="url(#gld)" stroke="#8E6713" stroke-width="1"/></g>' +
-    '<circle cx="50" cy="120" r="5" fill="#FFF3BF" stroke="#8E6713" stroke-width="1.5"/></svg>';
+  var SHEARS = '<div class="cut-shears"><img src="assets/img/scissors.png" alt="" width="97" height="280"></div>';
 
   function build() {
     var d = document.createElement("div");
@@ -29,7 +23,7 @@
   function reveal() {
     var d = build(), L = d.querySelector(".silk.l"), R = d.querySelector(".silk.r"), S = d.querySelector(".cut-shears");
     root.classList.remove("cut-wait");
-    var H = window.innerHeight, t0 = null, dur = 1500, tip = 232;
+    var H = window.innerHeight, t0 = null, dur = 1500, tip = 280;
     function ease(t) { return t < .5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2; }
     function frame(ts) {
       if (t0 === null) t0 = ts;

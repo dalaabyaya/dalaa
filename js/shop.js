@@ -93,7 +93,22 @@
 
   function update() {
     var list = P.filter(matches).sort(sorter());
-    $("#shop-grid").innerHTML = list.length ? list.map(D.card).join("") :
+    var real = list.filter(function (p) { return !p.placeholder; }), soon = list.filter(function (p) { return p.placeholder; });
+    function spread(p, i) {
+      var url = "product.html?p=" + esc(p.slug), c0 = p.colors[0];
+      var cols = p.colors.map(function (c) { return '<li><i style="--c:' + esc(c.swatch || c.hex) + '"></i>' + esc(c.name) + "</li>"; }).join("");
+      return '<section class="spread" aria-label="' + esc(p.name) + '"><div class="sp-cover">' + D.card(p) + "</div>" +
+        '<div class="sp-info"><span class="sp-no">No. ' + String(P.indexOf(p) + 1).padStart(2, "0") + '</span>' +
+        '<h2 class="sp-name"><a href="' + url + '">' + esc(p.name) + "</a></h2>" +
+        '<p class="sp-type">' + esc(p.type) + "</p>" +
+        '<div class="sp-price">' + D.priceHTML(p) + "</div>" +
+        '<p class="sp-desc">' + esc(p.description) + "</p>" +
+        '<ul class="sp-cols">' + cols + "</ul>" +
+        '<div class="sp-cta"><a class="btn btn-primary" href="' + url + '">View the piece</a></div></div></section>';
+    }
+    var html = real.map(spread).join("");
+    if (soon.length) html += '<section class="soon" aria-label="Coming soon"><h2 class="soon-h">Coming <em>soon</em></h2><div class="grid soon-grid">' + soon.map(D.card).join("") + "</div></section>";
+    $("#shop-grid").innerHTML = list.length ? html :
       '<div class="empty"><span class="script">Nothing yet, gorgeous</span><p>No pieces match those filters. Try loosening one.</p><button class="btn btn-ghost" data-clear>Clear filters</button></div>';
     $("#shop-count").textContent = list.length + (list.length === 1 ? " piece" : " pieces");
     $("#shop-chips").innerHTML = chipsHTML();

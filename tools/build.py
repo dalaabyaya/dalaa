@@ -253,14 +253,13 @@ shop = head("Shop the Collection | Dalaa by Aya",
       <div class="fgroup"><h3>Price (AUD)</h3><div class="price-row"><label class="sr-only" for="pmin">Minimum price</label><input id="pmin" type="number" min="0" placeholder="Min"><span>–</span><label class="sr-only" for="pmax">Maximum price</label><input id="pmax" type="number" min="0" placeholder="Max"></div><p class="fnote" id="f-price-note"></p></div>
       <button class="btn btn-ghost" style="width:100%" data-clear>Clear all</button>
     </aside>
-    <div><div class="chips" id="shop-chips"></div><div class="grid" id="shop-grid" style="grid-template-columns:repeat(3,1fr)"></div></div>
+    <div><div class="chips" id="shop-chips"></div><div id="shop-grid"></div></div>
   </div>
 </div>
 <div style="height:100px"></div>
 {newsletter()}
 </main>
 {news_footer()}
-<style>@media (max-width:1100px){{#shop-grid{{grid-template-columns:repeat(2,1fr)!important}}}}@media (max-width:420px){{#shop-grid{{gap:28px 10px}}}}</style>
 <script src="js/shop.js"></script>
 {chrome_layers()}
 </body></html>

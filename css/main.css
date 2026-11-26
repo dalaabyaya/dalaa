@@ -161,9 +161,8 @@ section.s{padding:104px 0}
 .media-main .main,.media-alt .alt{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 38%}
 .media-alt::after,.leaf-front::after{content:"";position:absolute;inset:0;pointer-events:none;
   background:linear-gradient(90deg,rgba(0,0,0,.34),rgba(0,0,0,0) 7%,rgba(255,255,255,.16) 8.5%,rgba(255,255,255,0) 11%)}
-.leaf{transform-origin:left center;transform-style:preserve-3d}
-.leaf-front,.leaf-back{backface-visibility:hidden;-webkit-backface-visibility:hidden}
-.leaf-back{transform:rotateY(180deg);border-radius:5px 2px 2px 5px;background:repeating-linear-gradient(0deg,#f7f3ec 0 2px,#f0eae1 2px 3px)}
+.leaf-back{display:none}
+.leaf{transform-origin:100% 0}
 .leaf-front:before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(180deg,rgba(0,0,0,.28),rgba(0,0,0,0) 26%,rgba(0,0,0,0) 62%,rgba(0,0,0,.42))}
 .cv-top{position:absolute;z-index:2;left:0;right:0;top:12px;text-align:center;color:#fff;text-shadow:0 1px 10px rgba(0,0,0,.45);line-height:1}
 .cv-mast{display:block;font-family:var(--serif);font-size:clamp(20px,2.3vw,32px);letter-spacing:.22em;margin-left:.22em}
@@ -171,21 +170,19 @@ section.s{padding:104px 0}
 .cv-no{position:absolute;z-index:2;left:14px;bottom:12px;font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:#fff;text-shadow:0 1px 8px rgba(0,0,0,.6)}
 .cv-type{position:absolute;z-index:2;right:12px;bottom:12px;font-family:var(--serif);font-style:italic;font-size:15px;color:#fff;text-shadow:0 1px 8px rgba(0,0,0,.6)}
 .card:hover,.card:focus-within,.card.turned{z-index:6}
-/* The page is thin paper: it lifts, bends and settles as it turns (flutters a little, like it is held at the spine). */
-@keyframes pageTurn{
-  0%{transform:rotateY(0) rotateX(0) skewY(0)}
-  18%{transform:rotateY(-24deg) rotateX(2.5deg) skewY(1.6deg)}
-  42%{transform:rotateY(-78deg) rotateX(-3deg) skewY(-2.4deg)}
-  66%{transform:rotateY(-132deg) rotateX(2deg) skewY(1.6deg)}
-  86%{transform:rotateY(-176deg) rotateX(-.8deg) skewY(-.6deg)}
-  100%{transform:rotateY(-172deg) rotateX(0) skewY(0)}}
-@keyframes pageShade{0%{filter:brightness(1)}30%{filter:brightness(.84)}55%{filter:brightness(1.1)}80%{filter:brightness(.9)}100%{filter:brightness(1)}}
-@keyframes faceOut{to{opacity:0}}
-.card.turned .leaf{animation:pageTurn 1.25s cubic-bezier(.4,.05,.25,1) forwards}
-.card.unturned .leaf{animation:pageTurn .95s cubic-bezier(.4,.05,.25,1) reverse forwards}
-.card.turned .leaf-front,.card.turned .leaf-back{animation:pageShade 1.25s ease-in-out,faceOut .3s 1s forwards}
-.card.unturned .leaf-front,.card.unturned .leaf-back{animation:pageShade .95s ease-in-out,faceOut .2s reverse forwards}
-@media (prefers-reduced-motion:reduce){.card.turned .leaf,.card.unturned .leaf{animation:none}.card.turned .leaf-front,.card.turned .leaf-back{animation:faceOut .4s forwards}.card.unturned .leaf-front,.card.unturned .leaf-back{animation:none}}
+/* Thin paper: the top sheet slips off the stack (slides, lifts at a corner, sags, floats away) and slips back on. */
+@keyframes pageSlip{
+  0%{transform:none;filter:drop-shadow(0 0 0 rgba(0,0,0,0))}
+  22%{transform:translate(3%,-1.2%) rotate(1.4deg) skewY(-.8deg);filter:drop-shadow(0 6px 8px rgba(0,0,0,.2))}
+  55%{transform:translate(15%,2%) rotate(5deg) skewY(-2.6deg);filter:drop-shadow(0 14px 14px rgba(0,0,0,.3))}
+  80%{transform:translate(26%,8%) rotate(7deg) skewY(-1.4deg);filter:drop-shadow(0 18px 16px rgba(0,0,0,.22))}
+  100%{transform:translate(32%,12%) rotate(8deg) skewY(0);filter:drop-shadow(0 20px 18px rgba(0,0,0,.12))}}
+@keyframes slipOut{0%,35%{opacity:1}100%{opacity:0}}
+.card.turned .leaf{animation:pageSlip 1.35s cubic-bezier(.33,.0,.2,1) forwards}
+.card.unturned .leaf{animation:pageSlip 1s cubic-bezier(.33,.0,.2,1) reverse forwards}
+.card.turned .leaf-front{animation:slipOut 1.35s ease-in forwards}
+.card.unturned .leaf-front{animation:slipOut 1s ease-in reverse forwards}
+@media (prefers-reduced-motion:reduce){.card.turned .leaf,.card.unturned .leaf{animation:none}.card.turned .leaf-front{animation:slipOut .5s forwards}.card.unturned .leaf-front{animation:none}}
 .tag{position:absolute;top:12px;left:12px;z-index:2;background:var(--ivory);color:var(--magenta);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;font-weight:500;padding:6px 12px;border-radius:999px}
 .tag.sold{background:var(--choc);color:var(--ivory)}
 .tag.ph-flag{left:auto;top:auto;bottom:40px;right:12px;background:rgba(255,255,255,.85);color:var(--muted);letter-spacing:.14em}
@@ -505,12 +502,9 @@ table.sg th{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:va
   transition:transform 1.15s cubic-bezier(.55,.05,.8,.5),opacity .9s ease .25s}
 .cut .silk.l{left:0;background-position:0 0;transform-origin:0 0}
 .cut .silk.r{right:0;background-position:100% 0;transform-origin:100% 0}
-.cut-shears{position:absolute;left:50%;top:0;transform:translate(-50%,-300px);filter:drop-shadow(0 6px 10px rgba(60,40,10,.45));will-change:transform}
-.cut-shears .blade{transform-origin:50px 120px}
-.cut-shears .a{animation:snipA .3s ease-in-out infinite}
-.cut-shears .b{animation:snipB .3s ease-in-out infinite}
-@keyframes snipA{0%,100%{transform:rotate(9deg)}50%{transform:rotate(0)}}
-@keyframes snipB{0%,100%{transform:rotate(-9deg)}50%{transform:rotate(0)}}
+.cut-shears{position:absolute;left:50%;top:0;width:97px;height:280px;transform:translate(-50%,-340px);filter:drop-shadow(0 8px 12px rgba(60,40,20,.4));will-change:transform}
+.cut-shears img{display:block;width:100%;height:100%;transform:rotate(180deg);transform-origin:50% 50%;animation:snip .26s ease-in-out infinite}
+@keyframes snip{0%,100%{transform:rotate(180deg) translateY(0)}50%{transform:rotate(177deg) translateY(-5px)}}
 .cut.fall .silk.l{transform:translate(-14%,70%) rotate(-24deg);opacity:0}
 .cut.fall .silk.r{transform:translate(14%,70%) rotate(24deg);opacity:0}
 .cut.fall .cut-shears{transition:transform 1s ease-in,opacity .6s;opacity:0}
@@ -521,3 +515,50 @@ table.sg th{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:va
 html.cut-wait::after{content:"";position:fixed;inset:0;z-index:9998;background:#f7f3ee;animation:cutwait 0s 5s forwards}
 @keyframes cutwait{to{opacity:0;visibility:hidden}}
 @media (prefers-reduced-motion:reduce){.cut{display:none}html.cut-wait::after{display:none}}
+
+/* ---- Chic, editorial covers: ink, ivory and a whisper of rose; no candy colours ---- */
+.cm .ph{background:linear-gradient(165deg,#3a3431,#1a1615)!important;color:#d8cfc6}
+.cm .ph::before{background:radial-gradient(circle at 30% 18%,rgba(255,255,255,.12),transparent 55%)}
+.cm .ph .ph-kiss{display:none}
+.cm .ph .ph-label{display:none}
+.card-media{border-radius:1px 3px 3px 1px;box-shadow:.6px .6px 0 #fff,1.2px 1.2px 0 #d9d3cb,1.8px 1.8px 0 #fff,2.4px 2.4px 0 #cfc8bf,3px 3px 0 #fff,3.6px 3.6px 0 #c6beb4,12px 18px 26px -10px rgba(20,14,12,.45)}
+.media-alt,.leaf-front{border-radius:1px 3px 3px 1px}
+.leaf-front:before{background:linear-gradient(180deg,rgba(10,8,8,.38),rgba(10,8,8,0) 24%,rgba(10,8,8,0) 58%,rgba(10,8,8,.55))}
+.leaf-front .cv-frame,.cv-frame{position:absolute;inset:9px;border:1px solid rgba(255,255,255,.35);z-index:2;pointer-events:none}
+.cv-top{top:20px;text-shadow:none}
+.cv-mast{font-family:"Playfair Display","Bodoni Moda","Didot",var(--serif);font-weight:400;font-size:clamp(17px,1.9vw,27px);letter-spacing:.38em;margin-left:.38em;color:#fff}
+.cv-by{font-family:var(--serif);font-style:italic;font-size:clamp(11px,1vw,14px);letter-spacing:.06em;color:#E6CFC8;margin:3px 0 0 0;transform:none;text-shadow:none}
+.cv-no{left:22px;bottom:20px;font-size:8.5px;letter-spacing:.32em;text-shadow:none;opacity:.9}
+.cv-type{right:22px;bottom:18px;font-size:13px;text-shadow:none}
+.cm .tag{top:auto;bottom:44px;left:22px;background:none;color:#fff;border:1px solid rgba(255,255,255,.7);border-radius:0;padding:4px 8px;font-size:8.5px;letter-spacing:.28em}
+.cm .tag.ph-flag{left:auto;right:22px;bottom:44px;background:none;color:#cfc6bc;border-color:rgba(255,255,255,.35)}
+.cm .quick-btn{border-radius:0;background:rgba(255,255,255,.94);font-size:10px;letter-spacing:.28em}
+.cm .quick{left:22px;right:22px;bottom:70px}
+
+/* ---- Shop: one piece at a time ---- */
+#shop-grid{display:block}
+.spread{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:clamp(28px,5vw,72px);align-items:center;min-height:calc(100vh - 220px);padding:34px 0 54px;border-bottom:1px solid var(--line,rgba(43,22,18,.12))}
+.spread:nth-of-type(even){grid-template-columns:minmax(0,1fr) minmax(0,1.05fr)}
+.spread:nth-of-type(even) .sp-cover{order:2}
+.sp-cover{display:flex;justify-content:center}
+.sp-cover .card{width:min(100%,calc((100vh - 200px)*.75));max-width:520px}
+.sp-cover .card-info{display:none}
+.sp-info{max-width:430px}
+.sp-no{display:block;font-size:10.5px;letter-spacing:.34em;text-transform:uppercase;color:var(--muted)}
+.sp-name{font-family:var(--serif);font-weight:400;font-size:clamp(34px,4.2vw,58px);line-height:1.04;margin:14px 0 8px}
+.sp-name a{color:inherit}
+.sp-type{font-family:var(--serif);font-style:italic;font-size:19px;color:var(--muted);margin:0 0 16px}
+.sp-price{margin-bottom:20px}
+.sp-desc{line-height:1.7;color:var(--muted);margin:0 0 20px}
+.sp-cols{list-style:none;padding:0;margin:0 0 28px;display:flex;flex-wrap:wrap;gap:8px 20px;font-size:11px;letter-spacing:.2em;text-transform:uppercase}
+.sp-cols i{display:inline-block;width:11px;height:11px;border-radius:50%;background:var(--c);margin-right:8px;vertical-align:-1px;box-shadow:0 0 0 1px rgba(0,0,0,.15)}
+.soon{padding:56px 0 0}
+.soon-h{font-family:var(--serif);font-weight:400;font-size:clamp(28px,3vw,40px);margin:0 0 26px}
+.soon-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:34px 22px;opacity:.9}
+@media (max-width:1100px){.soon-grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:820px){
+  .spread,.spread:nth-of-type(even){grid-template-columns:1fr;min-height:0;gap:26px;padding:26px 0 44px}
+  .spread:nth-of-type(even) .sp-cover{order:0}
+  .sp-cover .card{width:min(86%,420px)}
+  .sp-info{max-width:none}
+}
