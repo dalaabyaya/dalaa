@@ -97,25 +97,71 @@
     function spread(p, i) {
       var url = "product.html?p=" + esc(p.slug), c0 = p.colors[0];
       var cols = p.colors.map(function (c) { return '<li><i style="--c:' + esc(c.swatch || c.hex) + '"></i>' + esc(c.name) + "</li>"; }).join("");
-      return '<section class="spread" aria-label="' + esc(p.name) + '"><div class="sp-cover">' + D.card(p) + "</div>" +
+      return '<div class="pg"><div class="pg-front"><section class="spread' + (i % 2 ? " alt" : "") + '" aria-label="' + esc(p.name) + '"><div class="sp-cover">' + D.card(p) + "</div>" +
         '<div class="sp-info"><span class="sp-no">No. ' + String(P.indexOf(p) + 1).padStart(2, "0") + '</span>' +
         '<h2 class="sp-name"><a href="' + url + '">' + esc(p.name) + "</a></h2>" +
         '<p class="sp-type">' + esc(p.type) + "</p>" +
         '<div class="sp-price">' + D.priceHTML(p) + "</div>" +
         '<p class="sp-desc">' + esc(p.description) + "</p>" +
         '<ul class="sp-cols">' + cols + "</ul>" +
-        '<div class="sp-cta"><a class="btn btn-primary" href="' + url + '">View the piece</a></div></div></section>';
+        '<div class="sp-cta"><a class="btn btn-primary" href="' + url + '">View the piece</a></div></div></section></div><div class="pg-back"></div></div>';
     }
-    var html = real.map(spread).join("");
+    var html = real.length ? '<div class="mag" id="mag" tabindex="0" aria-label="The collection. Use the arrows to turn the page."><div class="mag-stage">' + real.map(spread).join("") + "</div>" +
+      (real.length > 1 ? '<div class="mag-nav"><button class="mag-btn" data-mag="prev" aria-label="Previous page">&#8592;</button><span class="mag-count" aria-live="polite"><b>01</b> / ' + String(real.length).padStart(2, "0") + '</span><button class="mag-btn" data-mag="next" aria-label="Turn the page">&#8594;</button></div>' : "") + "</div>" : "";
     if (soon.length) html += '<section class="soon" aria-label="Coming soon"><h2 class="soon-h">Coming <em>soon</em></h2><div class="grid soon-grid">' + soon.map(D.card).join("") + "</div></section>";
     $("#shop-grid").innerHTML = list.length ? html :
       '<div class="empty"><span class="script">Nothing yet, gorgeous</span><p>No pieces match those filters. Try loosening one.</p><button class="btn btn-ghost" data-clear>Clear filters</button></div>';
+    initMag();
     $("#shop-count").textContent = list.length + (list.length === 1 ? " piece" : " pieces");
     $("#shop-chips").innerHTML = chipsHTML();
     var n = state.types.length + state.sizes.length + state.colors.length + (state.min !== "" || state.max !== "" ? 1 : 0);
     $("#filter-n").textContent = n ? " (" + n + ")" : "";
     writeURL();
   }
+
+
+  /* Magazine pager: pages flip over to the right like thin paper. */
+  var mag = null;
+  function initMag() {
+    var el = $("#mag"); mag = null; if (!el) return;
+    var pgs = $$(".pg", el), cur = 0, busy = false, count = $(".mag-count b", el);
+    function set() {
+      pgs.forEach(function (p, i) {
+        p.classList.remove("cur", "under", "done", "hid", "fo", "fb");
+        p.classList.add(i < cur ? "done" : i === cur ? "cur" : i === cur + 1 ? "under" : "hid");
+      });
+      if (count) count.textContent = String(cur + 1).padStart(2, "0");
+      $$("[data-mag=prev]", el).forEach(function (b) { b.disabled = cur === 0; });
+      $$("[data-mag=next]", el).forEach(function (b) { b.disabled = cur === pgs.length - 1; });
+    }
+    function go(dir) {
+      if (busy) return;
+      var to = cur + dir; if (to < 0 || to >= pgs.length) return;
+      busy = true;
+      var reduce = window.matchMedia && matchMedia("(prefers-reduced-motion:reduce)").matches;
+      var mover = dir > 0 ? pgs[cur] : pgs[to];
+      if (dir < 0) { mover.classList.remove("done"); mover.classList.add("fb"); pgs[cur].classList.remove("cur"); pgs[cur].classList.add("under"); }
+      else { mover.classList.add("fo"); pgs[to].classList.remove("hid"); pgs[to].classList.add("under"); }
+      var finished = false;
+      function end() { if (finished) return; finished = true; cur = to; busy = false; set(); window.scrollTo({ top: Math.max(0, el.getBoundingClientRect().top + window.pageYOffset - 150), behavior: "smooth" }); }
+      mover.addEventListener("animationend", function h(e) { if (e.target === mover) { mover.removeEventListener("animationend", h); end(); } });
+      setTimeout(end, reduce ? 50 : 1500);
+    }
+    el.addEventListener("click", function (e) { var b = e.target.closest("[data-mag]"); if (b) go(b.dataset.mag === "next" ? 1 : -1); });
+    /* a flick to the right turns the page over; a flick to the left turns it back */
+    var sx = null;
+    el.addEventListener("pointerdown", function (e) { if (e.pointerType !== "mouse" || e.button === 0) sx = [e.clientX, e.clientY]; });
+    el.addEventListener("pointerup", function (e) {
+      if (!sx) return; var dx = e.clientX - sx[0], dy = e.clientY - sx[1]; sx = null;
+      if (Math.abs(dx) > 70 && Math.abs(dx) > Math.abs(dy) * 1.6) go(dx > 0 ? 1 : -1);
+    });
+    mag = { go: go, el: el };
+    set();
+  }
+  document.addEventListener("keydown", function (e) {
+    if (!mag || /input|select|textarea/i.test((e.target.tagName || ""))) return;
+    if (e.key === "ArrowRight") mag.go(1); else if (e.key === "ArrowLeft") mag.go(-1);
+  });
 
   function toggle(arr, v) { var i = arr.indexOf(v); if (i > -1) arr.splice(i, 1); else arr.push(v); }
 
