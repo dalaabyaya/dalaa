@@ -282,7 +282,6 @@ shop = head("Shop the Collection | Dalaa by Aya",
   <span class="eyebrow">Handmade in Melbourne</span>
   <h1 style="margin-top:14px">The <em>collection</em></h1>
   <p class="page-quote">Modesty is a journey, let DALAA be a part of yours x</p>
-  <p>Pretty things with personality, made to be worn your way. Pick a favourite, gorgeous.</p>
 </section>
 <div class="wrap">
   <div class="toolbar">
