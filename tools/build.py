@@ -8,6 +8,7 @@ import random
 import re
 import hashlib
 
+SITE = "https://dalaabyaya.com/"  # live domain (also in CNAME)
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 FONTS = ("https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&family=Birthstone&family=Bodoni+Moda:ital,wght@0,400;0,600;1,400&"
          "family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@400;500&display=swap")
@@ -35,7 +36,9 @@ def head(title, desc, extra="", bodyclass=""):
 <meta property="og:title" content="{title}">
 <meta property="og:description" content="{desc}">
 <meta property="og:type" content="website">
-<meta property="og:image" content="assets/img/logo-pink.png">
+<meta property="og:url" content="__PAGE_URL__">
+<meta property="og:image" content="{SITE}assets/img/logo-pink.png">
+<link rel="canonical" href="__PAGE_URL__">
 <meta name="theme-color" content="#140A1C">
 <link rel="icon" type="image/png" href="assets/img/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -151,6 +154,7 @@ def write(name, html):
     def bust(m):
         v = _ver(m.group(2))
         return f'{m.group(1)}="{m.group(2)}?v={v}"' if v else m.group(0)
+    html = html.replace("__PAGE_URL__", SITE + ("" if name == "index.html" else name))
     html = re.sub(r'(href|src)="((?:css|js|data)/[^"?#]+\.(?:css|js))"', bust, html)
     with open(os.path.join(ROOT, name), "w", encoding="utf-8") as f:
         f.write(html)

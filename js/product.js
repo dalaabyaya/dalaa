@@ -17,6 +17,9 @@
 
     document.title = p.name + " | Dalaa by Aya";
     var md = $('meta[name="description"]'); if (md) md.content = p.description.slice(0, 155);
+    var pageURL = "https://dalaabyaya.com/product.html?p=" + encodeURIComponent(slug);
+    var cl = $('link[rel="canonical"]'); if (cl) cl.href = pageURL;
+    var ou = $('meta[property="og:url"]'); if (ou) ou.content = pageURL;
     var ld = { "@context": "https://schema.org", "@type": "Product", name: p.name, description: p.description, brand: { "@type": "Brand", name: "Dalaa by Aya" } };
     if (p.price != null) ld.offers = { "@type": "Offer", priceCurrency: "AUD", price: p.price, availability: D.totalStock(p) > 0 ? "https://schema.org/InStock" : "https://schema.org/OutOfStock" };
     var s = document.createElement("script"); s.type = "application/ld+json"; s.textContent = JSON.stringify(ld); document.head.appendChild(s);
