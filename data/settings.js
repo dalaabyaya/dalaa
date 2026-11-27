@@ -20,12 +20,12 @@ window.DALAA_SETTINGS = {
      file name here (e.g. "assets/img/hero.jpg"). Empty = tasteful placeholder. */
   images: {
     hero: "assets/img/fabric-rolls.jpg", // swap for your campaign photo when you have one
-    energyA: "",
+    energyA: "assets/img/lake-dusk.jpg",
     energyB: "",
-    storyPreview: "",
+    storyPreview: "assets/img/story-sisters.jpg",
     storyOpening: "",
-    storyStruggle: "",
-    storyFrustration: "",
+    storyStruggle: "assets/img/story-sisters.jpg",
+    storyFrustration: "assets/img/story-golden-hour.jpg",
     storyHands: "",
     storyPhilosophy: ""
   },
