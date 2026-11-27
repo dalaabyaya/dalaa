@@ -189,7 +189,7 @@ home = head("Dalaa by Aya | Handmade modest fashion, Melbourne",
   <div class="wrap">
     <div class="mh-top sx"><span>Melbourne</span><span>Handmade modest fashion</span><span>Issue No. 01</span></div>
     <div class="mh-mast sx" style="--d:1">
-      <svg viewBox="0 0 100 25" role="img" aria-label="DALAA"><text x="50" y="22" text-anchor="middle" textLength="99" lengthAdjust="spacingAndGlyphs">DALAA</text></svg>
+      <svg viewBox="0 0 100 34" role="img" aria-label="Dalaa"><defs><linearGradient id="mhg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFB3E0"/><stop offset="1" stop-color="#FF4FB0"/></linearGradient></defs><text x="50" y="28" text-anchor="middle">Dalaa</text></svg>
       <span class="mh-by">by aya</span>
     </div>
     <div class="mh-rule sx" style="--d:2"></div>

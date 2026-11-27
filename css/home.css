@@ -1,3 +1,4 @@
+@font-face{font-family:"DalaaScript";src:url("../assets/fonts/Chorus.otf") format("opentype");font-display:swap}
 /* ==========================================================
    HOME in the dark: same velvet look as Our Story.
    Loaded after story.css on index.html; everything is scoped to .home-dark.
@@ -85,8 +86,8 @@
 .mag-hero .wrap{display:block;padding:20px 0 70px}
 .mh-top{display:flex;justify-content:space-between;font-size:10.5px;letter-spacing:.34em;text-transform:uppercase;color:var(--ink-dim);padding:6px 0 10px}
 .mh-mast{position:relative;line-height:0}
-.mh-mast svg{display:block;width:100%;height:auto;overflow:visible;fill:#fff;font-family:"Bodoni Moda","Playfair Display","Didot",var(--serif);filter:drop-shadow(0 0 40px rgba(155,93,229,.45))}
-.mh-by{position:absolute;right:5%;bottom:-3%;font-family:var(--script);font-size:clamp(26px,4.4vw,64px);line-height:1;color:#FF7EC8;transform:rotate(-5deg);text-shadow:0 0 22px rgba(255,126,200,.55)}
+.mh-mast svg{display:block;width:min(100%,820px);margin:0 auto;height:auto;overflow:visible;fill:url(#mhg);font-family:"DalaaScript","Zapf Chancery","Apple Chancery",var(--script),cursive;font-size:36px;filter:drop-shadow(0 0 26px rgba(255,79,176,.5))}
+.mh-by{position:absolute;right:max(5%,calc(50% - 400px));bottom:-1%;font-family:var(--script);font-size:clamp(26px,4.4vw,64px);line-height:1;color:#E4CDF5;transform:rotate(-5deg);text-shadow:0 0 22px rgba(201,166,228,.55)}
 .mh-rule{height:1px;margin:22px 0 0;background:linear-gradient(90deg,transparent,rgba(201,166,228,.7),transparent)}
 .mh-grid{display:grid;grid-template-columns:1fr minmax(260px,.62fr) 1fr;gap:clamp(24px,4vw,64px);align-items:center;padding-top:40px}
 .mh-kicker{display:block;font-size:10.5px;letter-spacing:.34em;text-transform:uppercase;color:var(--glow);margin-bottom:18px}
