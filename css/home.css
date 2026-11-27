@@ -104,7 +104,7 @@
 @media (max-width:900px){
   .mh-top span:nth-child(2){display:none}
   .mh-grid{grid-template-columns:1fr;gap:30px}
-  .mh-copy{order:2}.mag-hero .hv-par{order:1;width:min(100%,340px);margin-inline:auto}.mh-lines{order:3;border-left:0;padding-left:0;border-top:1px solid rgba(201,166,228,.35);padding-top:20px}
+  .mh-copy{order:1}.mag-hero .hv-par{order:2;width:min(100%,340px);margin-inline:auto}.mh-lines{order:3;border-left:0;padding-left:0;border-top:1px solid rgba(201,166,228,.35);padding-top:20px}
 }
 
 /* ---- Quick add: small, dark glass, light text, so it can actually be read ---- */
