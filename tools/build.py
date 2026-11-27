@@ -212,7 +212,7 @@ home = head("Dalaa by Aya | Handmade modest fashion, Melbourne",
     <span class="eyebrow">Meet Dalaa · <span class="arabic" style="font-size:18px;letter-spacing:0">دلع</span></span>
     <h2 style="margin-top:20px" class="sx split" aria-label="Not your usual modest wardrobe.">{words("Not your usual")} <em>{words("modest", 3)}</em> {words("wardrobe.", 4)}</h2>
     <p>We believe modesty should never come at the expense of self-expression. Dalaa was created for the girls who want more character and individuality in their wardrobe.</p>
-    <p class="closing lit">Modesty is a journey, let DALAA be part of it</p>
+    <p class="closing lit">Modesty is a journey, let DALAA be a part of yours x</p>
   </div>
 </section>
 
@@ -239,7 +239,7 @@ home = head("Dalaa by Aya | Handmade modest fashion, Melbourne",
 
 <section class="s story-prev" aria-labelledby="sp-h">
   <div class="wrap">
-    <div class="vis sx">{ph("storyPreview", "Your photo goes here", "arch", "Aya, founder of Dalaa")}<img class="logo-b" src="assets/img/logo-black-sm.png" alt="Dalaa in Arabic calligraphy, دلع" loading="lazy"></div>
+    <div class="vis sx">{ph("storyPreview", "Your photo goes here", "arch", "Aya, founder of Dalaa")}<img class="logo-b" src="assets/img/logo-arabic-dark.png" alt="Dalaa in Arabic calligraphy, دلع" loading="lazy"></div>
     <div class="sx">
       <span class="eyebrow">Our story</span>
       <h2 id="sp-h" class="sx split" aria-label="It started with a wardrobe problem.">{words("It started with a")} <em>{words("wardrobe", 4)}</em> {words("problem.", 5)}</h2>

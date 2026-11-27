@@ -44,7 +44,7 @@
 .home-dark .tile.t6{background:linear-gradient(90deg,#3d0a1a,#7a1230)}
 .home-dark .tile{transition:transform .6s var(--ease),box-shadow .6s}
 .home-dark .tile:hover{transform:translateY(-6px);box-shadow:0 0 50px -10px rgba(155,93,229,.55)}
-.home-dark .story-prev .vis .logo-b{background:transparent;box-shadow:none;filter:invert(1) drop-shadow(0 0 16px rgba(201,166,228,.7))}
+.home-dark .story-prev .vis .logo-b{background:transparent;box-shadow:none;padding:0;width:170px;filter:drop-shadow(0 0 16px rgba(201,166,228,.7))}
 .home-dark .story-prev .vis .arch{border-color:rgba(201,166,228,.55);box-shadow:0 0 70px -20px rgba(155,93,229,.6)}
 .home-dark .story-prev blockquote{border-left-color:var(--neon);color:var(--ink-dim)}
 .home-dark .story-prev,.home-dark .story-prev .wrap{color:var(--ink)}
