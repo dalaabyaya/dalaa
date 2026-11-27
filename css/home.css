@@ -128,3 +128,5 @@
 .home-dark .card:hover .card-media{box-shadow:.6px .6px 0 #2a2226,1.2px 1.2px 0 #cfc8bf,1.8px 1.8px 0 #2a2226,2.4px 2.4px 0 #bdb5aa,3px 3px 0 #2a2226,3.6px 3.6px 0 #a79e93,0 30px 60px -16px rgba(155,93,229,.65)}
 .home-dark .card-name{font-family:var(--serif);font-size:19px}
 .home-dark .card-info .price{color:#D9B8EE}
+
+.page-quote{font-family:var(--serif);font-style:italic;font-size:clamp(24px,3.2vw,40px);line-height:1.15;color:var(--glow);text-shadow:0 0 26px rgba(155,93,229,.55);margin:0 0 30px;text-wrap:balance}
