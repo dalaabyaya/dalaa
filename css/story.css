@@ -11,7 +11,10 @@
   --magenta:#6B2FA0; --hot:#9B5DE5; --bubble:#D9B8EE; --cherry:#5A0F22;
   background:var(--noir);
 }
-.story-dark .announce{background:linear-gradient(90deg,#3a1763,#5A0F22,#3a1763)}
+.story-dark .announce{background:#06040A;color:#EEE9F6;border-bottom:1px solid rgba(201,166,228,.22);padding:7px 16px;font-size:12px;letter-spacing:.3em}
+.story-dark .announce .arabic{font-size:16px;color:#E4D4F4}
+.story-dark .announce::before,.story-dark .announce::after{content:"";display:inline-block;width:54px;height:1px;background:linear-gradient(90deg,transparent,rgba(201,166,228,.7));vertical-align:middle;margin:0 18px}
+.story-dark .announce::after{transform:scaleX(-1)}
 .story-dark main{color:var(--ink);position:relative;overflow-x:hidden;overflow-x:clip}
 
 /* film grain */

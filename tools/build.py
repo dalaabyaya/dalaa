@@ -183,23 +183,32 @@ home = head("Dalaa by Aya | Handmade modest fashion, Melbourne",
 <div class="thread" aria-hidden="true"><i></i></div>
 <div class="spot" aria-hidden="true"></div>
 <main id="main">
-<section class="hero">
-  <div class="glow g1" aria-hidden="true"></div><div class="glow g2" aria-hidden="true"></div>
+<section class="hero mag-hero">
+  <div class="glow g1" aria-hidden="true"></div>
   {sparks}
-  {drift("d-hero-a", 0.16, 18, -12, 0.3)}{drift("d-hero-b", -0.1, -14, 14, 0.24)}
   <div class="wrap">
-    <div class="sx">
-      <span class="eyebrow">Handmade modest fashion · Melbourne</span>
-      <h1 class="sx split" aria-label="Modesty at your own accord.">{words("Modesty at your own")} <em>{words("accord.", 4)}</em></h1>
-      <p class="lead sx" style="--d:3">For the girls who like a little extra. Modest, but never ordinary.</p>
-      <div class="ctas sx" style="--d:4"><a class="btn btn-primary" href="shop.html">Shop the collection</a><a class="link-u" href="story.html">Get to know Dalaa</a></div>
+    <div class="mh-top sx"><span>Melbourne</span><span>Handmade modest fashion</span><span>Issue No. 01</span></div>
+    <div class="mh-mast sx" style="--d:1">
+      <svg viewBox="0 0 100 25" role="img" aria-label="DALAA"><text x="50" y="22" text-anchor="middle" textLength="99" lengthAdjust="spacingAndGlyphs">DALAA</text></svg>
+      <span class="mh-by">by aya</span>
     </div>
-    <div class="hv-par" data-speed="-0.05"><div class="hero-visual sx" style="--d:2">
-      <span class="script script-float" style="font-size:58px">gorgeous</span>
-      {ph("hero", "Campaign photo goes here", "hero-photo", "Sewing pattern laid out on a table (placeholder photo)")}
-      <img class="sticker" src="assets/img/kiss.png" alt="">
-      <div class="badge-circle"><div><b>handmade</b>in Melbourne</div></div>
-    </div></div>
+    <div class="mh-rule sx" style="--d:2"></div>
+    <div class="mh-grid">
+      <div class="mh-copy">
+        <span class="mh-kicker sx" style="--d:2">The Collection</span>
+        <h1 class="sx split" aria-label="Modesty at your own accord.">{words("Modesty at your own")} <em>{words("accord.", 4)}</em></h1>
+        <div class="ctas sx" style="--d:4"><a class="btn btn-primary" href="shop.html">Shop the collection</a><a class="link-u" href="story.html">Get to know Dalaa</a></div>
+      </div>
+      <div class="hv-par" data-speed="-0.05"><div class="hero-visual sx" style="--d:2">
+        {ph("hero", "Campaign photo goes here", "hero-photo", "Rolls of satin fabric on a shelf")}
+      </div></div>
+      <ul class="mh-lines sx" style="--d:3" aria-label="Inside this issue">
+        <li><small>Inside</small></li>
+        <li><a href="shop.html"><b>Obsidian Sparkle</b><span>Full-length, sequin lace</span></a></li>
+        <li><a href="shop.html"><b>The denim tie top</b><span>Asymmetrical, hand-tied</span></a></li>
+        <li><a href="story.html"><b>Our Story</b><span>Why Dalaa exists</span></a></li>
+      </ul>
+    </div>
   </div>
 </section>
 <div class="ticker" aria-hidden="true"><div class="ticker-track">{tick}{tick}{tick}{tick}</div></div>
