@@ -279,9 +279,9 @@ shop = head("Shop the Collection | Dalaa by Aya",
             "Browse handmade modest dresses, full-length tops and more from Dalaa by Aya, Melbourne. Filter by size, colour, price and type.") + f"""
 <main id="main">
 <section class="page-head wrap">
-  <p class="page-quote">Modesty is a journey, let DALAA be a part of yours x</p>
   <span class="eyebrow">Handmade in Melbourne</span>
   <h1 style="margin-top:14px">The <em>collection</em></h1>
+  <p class="page-quote">Modesty is a journey, let DALAA be a part of yours x</p>
   <p>Pretty things with personality, made to be worn your way. Pick a favourite, gorgeous.</p>
 </section>
 <div class="wrap">
