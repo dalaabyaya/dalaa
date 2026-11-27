@@ -105,3 +105,26 @@
   .mh-grid{grid-template-columns:1fr;gap:30px}
   .mh-copy{order:2}.mag-hero .hv-par{order:1;width:min(100%,340px);margin-inline:auto}.mh-lines{order:3;border-left:0;padding-left:0;border-top:1px solid rgba(201,166,228,.35);padding-top:20px}
 }
+
+/* ---- Quick add: small, dark glass, light text, so it can actually be read ---- */
+.home-dark .cm .quick{left:auto;right:8%;bottom:25%;width:auto}
+.home-dark .cm .quick-btn{width:auto;background:rgba(10,7,16,.9);color:#F3EEFA;border:1px solid rgba(201,166,228,.7);border-radius:999px;padding:6px 13px;font-size:9px;font-weight:500;letter-spacing:.22em;text-shadow:none;box-shadow:0 6px 18px -6px rgba(0,0,0,.7)}
+.home-dark .cm .quick-btn:hover{background:#C9A6E4;color:#140A1C;border-color:#C9A6E4}
+
+/* ---- Cards in the site's own plum-and-lilac mood ---- */
+.home-dark .leaf-front:before{background:linear-gradient(180deg,rgba(20,10,28,.55),rgba(20,10,28,0) 30%,rgba(20,10,28,0) 46%,rgba(26,10,40,.82))}
+.home-dark .cv-frame{display:block;inset:2.6cqw;border:1px solid rgba(201,166,228,.42);z-index:2}
+.home-dark .cv-date{color:#D9B8EE}
+.home-dark .cv-lines small{color:#D9B8EE}
+.home-dark .cv-lines i{color:#D9B8EE}
+.home-dark .cv-lines b{text-shadow:0 0 26px rgba(155,93,229,.6),0 2px 18px rgba(0,0,0,.5)}
+.home-dark .cv-mast{filter:drop-shadow(0 0 16px rgba(155,93,229,.55))}
+.home-dark .cv-code{background:rgba(238,233,246,.92)}
+.home-dark .cv-code span{background:repeating-linear-gradient(90deg,#2a1440 0 .5cqw,transparent .5cqw .9cqw,#2a1440 .9cqw 1.9cqw,transparent 1.9cqw 2.3cqw,#2a1440 2.3cqw 2.6cqw,transparent 2.6cqw 3.4cqw)}
+.home-dark .cv-code em{color:#2a1440}
+.home-dark .cm .ph{background:linear-gradient(165deg,#4a2080,#140A1C)!important;color:#E4D4F4}
+.home-dark .cm{transition:transform .6s var(--ease)}
+.home-dark .card:hover .cm{transform:translateY(-6px)}
+.home-dark .card:hover .card-media{box-shadow:.6px .6px 0 #2a2226,1.2px 1.2px 0 #cfc8bf,1.8px 1.8px 0 #2a2226,2.4px 2.4px 0 #bdb5aa,3px 3px 0 #2a2226,3.6px 3.6px 0 #a79e93,0 30px 60px -16px rgba(155,93,229,.65)}
+.home-dark .card-name{font-family:var(--serif);font-size:19px}
+.home-dark .card-info .price{color:#D9B8EE}
